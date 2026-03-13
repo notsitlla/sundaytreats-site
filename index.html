@@ -1,105 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sunday Treats Bakery</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #fffaf3;
-      color: #333;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sunday Treats Bakery</title>
 
-    header {
-      background: #d35400;
-      color: white;
-      padding: 20px;
-      text-align: center;
-    }
+<style>
 
-    nav {
-      background: #f4a261;
-      text-align: center;
-      padding: 10px;
-    }
+body{
+font-family: Arial, sans-serif;
+margin:0;
+background:#fffaf3;
+color:#333;
+line-height:1.6;
+}
 
-    nav a {
-      margin: 0 15px;
-      text-decoration: none;
-      color: white;
-      font-weight: bold;
-    }
+header{
+background:#d35400;
+color:white;
+padding:40px 20px;
+text-align:center;
+}
 
-    .hero {
-      text-align: center;
-      padding: 60px 20px;
-    }
+nav{
+background:#f4a261;
+text-align:center;
+padding:12px;
+}
 
-    .hero h1 {
-      font-size: 40px;
-    }
+nav a{
+margin:0 20px;
+text-decoration:none;
+color:white;
+font-weight:bold;
+}
 
-    .section {
-      padding: 40px 20px;
-      max-width: 900px;
-      margin: auto;
-    }
+.container{
+max-width:1000px;
+margin:auto;
+padding:40px 20px;
+}
 
-    .menu-item {
-      margin-bottom: 15px;
-    }
+.hero{
+text-align:center;
+margin-bottom:40px;
+}
 
-    .footer {
-      background: #333;
-      color: white;
-      text-align: center;
-      padding: 20px;
-    }
-  </style>
+.hero h1{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.gallery{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:30px;
+margin-top:30px;
+}
+
+.gallery img{
+width:100%;
+border-radius:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.15);
+}
+
+.menu{
+margin-top:40px;
+}
+
+.menu-item{
+margin-bottom:12px;
+}
+
+.cta{
+background:#f4a261;
+color:white;
+text-align:center;
+padding:30px;
+border-radius:8px;
+margin-top:40px;
+}
+
+footer{
+background:#333;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+@media (max-width:700px){
+.gallery{
+grid-template-columns:1fr;
+}
+}
+
+</style>
+
 </head>
+
 <body>
-  <header>
-    <h1>Sunday Treats Bakery</h1>
-    <p>Fresh baked cookies & pastries for offices and events</p>
-  </header>
 
-  <nav>
-    <a href="#">Home</a>
-    <a href="#menu">Menu</a>
-    <a href="#order">Order</a>
-    <a href="#contact">Contact</a>
-  </nav>
+<header>
+<h1>Sunday Treats Bakery</h1>
+<p>Fresh baked cookies & pastries for offices and events</p>
+</header>
 
-  <section class="hero">
-    <h1>Fresh Baked Cookie Trays</h1>
-    <p>Perfect for meetings, office events, and celebrations.</p>
-  </section>
+<nav>
+<a href="#">Home</a>
+<a href="#menu">Menu</a>
+<a href="#order">Order</a>
+</nav>
 
-  <section id="menu" class="section">
-    <h2>Menu</h2>
-    <div class="menu-item"><strong>Chocolate Chip Cookies</strong> – Classic homemade cookies</div>
-    <div class="menu-item"><strong>Oatmeal Raisin Cookies</strong> – Soft and chewy</div>
-    <div class="menu-item"><strong>Assorted Cookie Tray</strong> – Perfect for office meetings</div>
-  </section>
+<div class="container">
 
-  <section id="order" class="section">
-    <h2>Order Cookie Trays</h2>
-    <p>To place an order, please email or call.</p>
-    <p>
-      Email: orders@sundaytreats.co<br />
-      Phone: (720) 000-0000
-    </p>
-  </section>
+<section class="hero">
+<h1>Fresh Baked Cookie Trays</h1>
+<p>Perfect for meetings, office events, and celebrations.</p>
+</section>
 
-  <section id="contact" class="section">
-    <h2>Service Area</h2>
-    <p>Serving Littleton, Highlands Ranch, and Denver offices.</p>
-  </section>
+<section class="gallery">
 
-  <div class="footer">
-    <p>© 2026 Sunday Treats Bakery</p>
-  </div>
+<img src="images/cookie_plater.png" alt="Cookie Tray">
+<img src="images/vanilla_extract.PNG" alt="Vanilla Extract">
+
+</section>
+
+<section id="menu" class="menu">
+<h2>Menu</h2>
+
+<div class="menu-item"><strong>Chocolate Chip Cookies</strong> – Classic homemade cookies</div>
+<div class="menu-item"><strong>Oatmeal Raisin Cookies</strong> – Soft and chewy</div>
+<div class="menu-item"><strong>Assorted Cookie Tray</strong> – Perfect for office meetings</div>
+
+</section>
+
+<section id="order" class="cta">
+<h2>Order Cookie Trays</h2>
+<p>Email: orders@sundaytreats.co</p>
+<p>Serving Littleton, Highlands Ranch, and Denver</p>
+</section>
+
+</div>
+
+<footer>
+© 2026 Sunday Treats Bakery
+</footer>
+
 </body>
 </html>
