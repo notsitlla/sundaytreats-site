@@ -1,319 +1,249 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sunday Treats Bakery</title>
+
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+    *{
+      box-sizing:border-box;
+      margin:0;
+      padding:0;
     }
 
-    body {
-      font-family: "Georgia", "Times New Roman", serif;
-      background: #f7f1ec;
-      color: #5f4a46;
+    body{
+      font-family: Georgia, "Times New Roman", serif;
+      background:#f7f1ec;
+      color:#5f4a46;
+      line-height:1.6;
     }
 
-    .topbar {
-      background: #c79286;
-      color: #fff;
-      text-align: center;
-      padding: 10px 16px;
-      font-size: 0.95rem;
-      letter-spacing: 0.02em;
+    img{
+      max-width:100%;
+      display:block;
     }
 
-    header {
-      background: #f9f4ef;
-      border-bottom: 1px solid #e7ddd6;
-      padding: 22px 6%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 20px;
+    .topbar{
+      background:#c79286;
+      color:white;
+      text-align:center;
+      padding:10px;
+      font-family:Arial, sans-serif;
+      font-size:0.9rem;
     }
 
-    .logo {
-      font-size: 2rem;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: #7e5b55;
+    header{
+      background:#f9f4ef;
+      border-bottom:1px solid #e7ddd6;
+      padding:22px 6%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
     }
 
-    .logo span {
-      display: block;
-      font-size: 0.95rem;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      font-family: Arial, sans-serif;
-      margin-top: 4px;
-      color: #b18b82;
+    .logo{
+      font-size:2rem;
+      color:#7e5b55;
     }
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      font-family: Arial, sans-serif;
+    .logo span{
+      display:block;
+      font-size:0.9rem;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      font-family:Arial, sans-serif;
+      color:#b18b82;
     }
 
-    nav a {
-      text-decoration: none;
-      color: #6c5651;
-      font-size: 1rem;
+    nav{
+      display:flex;
+      gap:28px;
+      align-items:center;
+      font-family:Arial, sans-serif;
     }
 
-    nav a:hover {
-      color: #b77a6c;
+    nav a{
+      color:#6c5651;
+      text-decoration:none;
     }
 
-    .btn {
-      background: #c79286;
-      color: white;
-      padding: 12px 22px;
-      border-radius: 2px;
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-      transition: 0.2s ease;
+    nav a:hover{
+      color:#b77a6c;
     }
 
-    .btn:hover {
-      background: #b27b70;
+    .btn{
+      background:#c79286;
+      color:white;
+      padding:12px 22px;
+      border-radius:3px;
+      font-weight:600;
+      text-decoration:none;
+      font-family:Arial, sans-serif;
     }
 
-    .hero {
-      min-height: 78vh;
-      display: grid;
-      grid-template-columns: 1.05fr 1fr;
-      align-items: center;
-      gap: 48px;
-      padding: 70px 6%;
-      background: #f7f1ec;
+    .btn:hover{
+      background:#b27b70;
     }
 
-    .hero-text {
-      max-width: 560px;
+    .btn-outline{
+      border:1px solid #bfa39b;
+      color:#7c625e;
+      padding:12px 22px;
+      font-family:Arial, sans-serif;
+      text-decoration:none;
     }
 
-    .hero-kicker {
-      font-family: Arial, sans-serif;
-      text-transform: uppercase;
-      letter-spacing: 0.18em;
-      color: #b18b82;
-      font-size: 0.85rem;
-      margin-bottom: 18px;
+    .hero{
+      display:grid;
+      grid-template-columns:1fr 1.2fr;
+      align-items:center;
+      gap:60px;
+      padding:80px 6%;
     }
 
-    .hero h1 {
-      font-size: clamp(2.9rem, 6vw, 5.4rem);
-      line-height: 0.95;
-      font-weight: 500;
-      color: #7c625e;
-      margin-bottom: 24px;
+    .hero-kicker{
+      font-family:Arial, sans-serif;
+      text-transform:uppercase;
+      letter-spacing:.18em;
+      color:#b18b82;
+      font-size:.8rem;
+      margin-bottom:20px;
     }
 
-    .hero p {
-      font-family: Arial, sans-serif;
-      font-size: 1.08rem;
-      line-height: 1.7;
-      color: #6f5d59;
-      margin-bottom: 30px;
-      max-width: 470px;
+    .hero h1{
+      font-size:clamp(2.5rem,5vw,4.5rem);
+      color:#7c625e;
+      line-height:1.05;
+      margin-bottom:20px;
     }
 
-    .hero-buttons {
-      display: flex;
-      gap: 14px;
-      flex-wrap: wrap;
+    .hero p{
+      font-family:Arial, sans-serif;
+      margin-bottom:30px;
+      color:#6f5d59;
     }
 
-    .btn-outline {
-      border: 1px solid #bfa39b;
-      color: #7c625e;
-      background: transparent;
-      padding: 12px 22px;
-      text-decoration: none;
-      font-weight: 600;
-      font-family: Arial, sans-serif;
+    .hero-buttons{
+      display:flex;
+      gap:14px;
     }
 
-    .btn-outline:hover {
-      background: #efe3db;
+    .slideshow{
+      position:relative;
+      width:100%;
+      max-width:900px;
+      height:500px;
+      margin:40px auto;
+      overflow:hidden;
+      border-radius:18px;
+      box-shadow:0 10px 30px rgba(0, 0, 0, 0.12);
+      background:#fff;
     }
 
-    .hero-image-wrap {
-      position: relative;
-      display: grid;
-      grid-template-columns: 1fr 0.72fr;
-      gap: 18px;
-      align-items: start;
+    .slide{
+      position:absolute;
+      inset:0;
+      opacity:0;
+      transition:opacity 1.2s ease-in-out;
+      pointer-events:none;
     }
 
-    .hero-image-main,
-    .hero-image-side {
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 16px 40px rgba(96, 70, 62, 0.15);
-      background: white;
+    .slide.active{
+      opacity:1;
+      pointer-events:auto;
     }
 
-    .hero-image-main img,
-    .hero-image-side img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+    .slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      display:block;
     }
 
-    .hero-image-main {
-      min-height: 520px;
+    .contain-image{
+      object-fit:contain !important;
+      background:#fffaf7;
+      padding:30px;
     }
 
-    .hero-image-side {
-      min-height: 300px;
-      margin-top: 70px;
+    .section{
+      padding:80px 6%;
     }
 
-    .section {
-      padding: 80px 6%;
+    .section-title{
+      text-align:center;
+      margin-bottom:50px;
     }
 
-    .section-title {
-      text-align: center;
-      margin-bottom: 50px;
+    .section-title h2{
+      font-size:2.4rem;
+      color:#7c625e;
     }
 
-    .section-title h2 {
-      font-size: clamp(2rem, 4vw, 3.2rem);
-      color: #7c625e;
-      margin-bottom: 12px;
-      font-weight: 500;
+    .menu-grid{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:24px;
     }
 
-    .section-title p {
-      font-family: Arial, sans-serif;
-      color: #7a6864;
-      max-width: 700px;
-      margin: 0 auto;
-      line-height: 1.7;
+    .menu-card{
+      background:#fffaf6;
+      padding:28px;
+      border:1px solid #eadfd8;
+      border-radius:12px;
     }
 
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+    .menu-card h3{
+      margin-bottom:10px;
+      color:#7c625e;
     }
 
-    .menu-card {
-      background: #fffaf6;
-      padding: 28px;
-      border: 1px solid #eadfd8;
-      border-radius: 12px;
-      box-shadow: 0 10px 24px rgba(100, 75, 68, 0.06);
+    .menu-card p{
+      font-family:Arial, sans-serif;
+      color:#6f5d59;
     }
 
-    .menu-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-      color: #7a615c;
+    .price{
+      margin-top:10px;
+      font-family:Arial, sans-serif;
+      font-weight:700;
+      color:#b77a6c;
     }
 
-    .menu-card p {
-      font-family: Arial, sans-serif;
-      line-height: 1.7;
-      color: #6c5c57;
-      margin-bottom: 16px;
+    .contact-box{
+      max-width:800px;
+      margin:auto;
+      background:#fffaf6;
+      border:1px solid #eadfd8;
+      padding:40px;
+      border-radius:14px;
+      text-align:center;
     }
 
-    .price {
-      font-family: Arial, sans-serif;
-      font-weight: 700;
-      color: #b77a6c;
+    footer{
+      background:#ead7ce;
+      text-align:center;
+      padding:24px;
+      font-family:Arial, sans-serif;
     }
 
-    .contact-box {
-      max-width: 860px;
-      margin: 0 auto;
-      background: #fffaf6;
-      border: 1px solid #eadfd8;
-      border-radius: 14px;
-      padding: 40px;
-      text-align: center;
-      box-shadow: 0 12px 28px rgba(100, 75, 68, 0.08);
-    }
-
-    .contact-box p {
-      font-family: Arial, sans-serif;
-      line-height: 1.8;
-      color: #6a5a56;
-      margin-bottom: 12px;
-    }
-
-    .contact-box a {
-      color: #b77a6c;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    footer {
-      background: #ead7ce;
-      text-align: center;
-      padding: 24px 16px;
-      font-family: Arial, sans-serif;
-      color: #6e5d58;
-      font-size: 0.95rem;
-    }
-
-    @media (max-width: 980px) {
-      .hero {
-        grid-template-columns: 1fr;
-        padding-top: 50px;
+    @media (max-width:900px){
+      .hero{
+        grid-template-columns:1fr;
+        text-align:center;
       }
 
-      .hero-text {
-        max-width: 100%;
+      .hero-buttons{
+        justify-content:center;
       }
 
-      .hero-image-wrap {
-        grid-template-columns: 1fr;
+      .slideshow{
+        height:340px;
       }
 
-      .hero-image-side {
-        margin-top: 0;
-        min-height: 260px;
-      }
-
-      .menu-grid {
-        grid-template-columns: 1fr;
-      }
-
-      header {
-        justify-content: center;
-        text-align: center;
-      }
-
-      nav {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero h1 {
-        line-height: 1.02;
-      }
-
-      .contact-box {
-        padding: 28px 20px;
-      }
-
-      nav {
-        gap: 16px;
+      .menu-grid{
+        grid-template-columns:1fr;
       }
     }
   </style>
@@ -333,19 +263,20 @@
     <nav>
       <a href="#home">Home</a>
       <a href="#menu">Menu</a>
-      <a href="#about">About</a>
       <a href="#contact">Contact</a>
       <a class="btn" href="#contact">Order Now</a>
     </nav>
   </header>
 
   <section class="hero" id="home">
-    <div class="hero-text">
+    <div>
       <div class="hero-kicker">Handmade baked goods</div>
-      <h1>Elegant treats for gatherings, gifting, and office moments.</h1>
+
+      <h1>Elegant treats for gatherings, gifting, and office meetings.</h1>
+
       <p>
-        Sunday Treats creates fresh baked cookies, pastry-inspired desserts, and small-batch specialties
-        designed to feel warm, thoughtful, and beautifully made.
+        Sunday Treats creates fresh baked cookies, pastry, desserts, and small-batch specialties.
+        Homemade, quality ingredients, beautifully made.
       </p>
 
       <div class="hero-buttons">
@@ -354,12 +285,17 @@
       </div>
     </div>
 
-    <div class="hero-image-wrap">
-      <div class="hero-image-main">
-        <img src="images/cookie_plater.png" alt="Cookie platter from Sunday Treats">
+   <div class="slideshow">
+      <div class="slide active">
+        <img src="images/cookie_plater.png" alt="Decorated cookie platter">
       </div>
-      <div class="hero-image-side">
-        <img src="images/vanilla_extract.PNG" alt="Vanilla extract bottle from Sunday Treats">
+
+      <div class="slide">
+        <img src="images/dry_cookie.png" alt="Freshly baked sugar cookie">
+      </div>
+
+      <div class="slide">
+        <img src="images/vanilla_extract.png" alt="Homemade vanilla extract" class="contain-image">
       </div>
     </div>
   </section>
@@ -367,65 +303,57 @@
   <section class="section" id="menu">
     <div class="section-title">
       <h2>Signature Menu</h2>
-      <p>
-        A simple collection of crowd-pleasing favorites for meetings, gifting, and special events.
-      </p>
     </div>
 
     <div class="menu-grid">
       <div class="menu-card">
         <h3>Cookie Platters</h3>
-        <p>
-          Assorted trays of fresh baked cookies, ideal for office meetings, celebrations, and group orders.
-        </p>
+        <p>Assorted trays of fresh baked cookies perfect for office meetings.</p>
         <div class="price">Starting at $18</div>
       </div>
 
       <div class="menu-card">
         <h3>Vanilla Specialties</h3>
-        <p>
-          Small-batch vanilla gifts and dessert-inspired offerings made to feel elevated and memorable.
-        </p>
+        <p>Small-batch vanilla gifts and dessert-inspired offerings.</p>
         <div class="price">Seasonal pricing</div>
       </div>
 
       <div class="menu-card">
         <h3>Custom Orders</h3>
-        <p>
-          Need something tailored for an event, team gathering, or gift set? We can create a custom selection.
-        </p>
+        <p>Need something tailored for an event? We can create a custom selection.</p>
         <div class="price">Request a quote</div>
       </div>
     </div>
   </section>
 
-  <section class="section" id="about">
-    <div class="section-title">
-      <h2>Made with care</h2>
-      <p>
-        Sunday Treats is built around simple presentation, thoughtful flavors, and desserts that feel polished
-        enough for gifting while still warm and homemade.
-      </p>
-    </div>
-  </section>
-
   <section class="section" id="contact">
     <div class="contact-box">
-      <div class="section-title" style="margin-bottom: 24px;">
-        <h2>Order & Contact</h2>
-      </div>
-      <p>Email: <a href="mailto:orders@sundaytreats.co">sundaytreatllc@gmail.com</a></p>
+      <h2>Order & Contact</h2>
+      <p>Email: <a href="mailto:sundaytreat@gmail.com">sundaytreat@gmail.com</a></p>
       <p>Serving Littleton, Highlands Ranch, and the greater Denver area.</p>
-      <p>For office trays, gifting, and custom dessert orders, please reach out by email.</p>
-      <p style="margin-top: 20px;">
-        <a class="btn" href="mailto:orders@sundaytreats.co">Email to Order</a>
-      </p>
+      <br>
+      <a class="btn" href="mailto:sundaytreat@gmail.com">Email to Order</a>
     </div>
   </section>
 
   <footer>
     © 2026 Sunday Treats Bakery · Fresh baked cookies & pastries for offices and events
   </footer>
+
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    function showNextSlide() {
+      slides[currentSlide].classList.remove("active");
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add("active");
+    }
+
+    if (slides.length > 0) {
+      setInterval(showNextSlide, 4000);
+    }
+  </script>
 
 </body>
 </html>
