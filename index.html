@@ -562,7 +562,7 @@
       <a href="#menu">Menu</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
-      <a href="https://forms.gle/QGvcCNBFvnM36obY8" target="_blank" rel="noopener" class="btn">Order Now</a>
+      <a href="#contact" class="btn">Order Now</a>
     </nav>
   </header>
 
@@ -578,7 +578,7 @@
       </p>
       <div class="hero-buttons">
         <a class="btn" href="#menu">View Menu</a>
-        <a class="btn-ghost" href="https://forms.gle/QGvcCNBFvnM36obY8" target="_blank" rel="noopener">Place an Order</a>
+        <a class="btn-ghost" href="#contact">Place an Order</a>
       </div>
     </div>
 
@@ -709,20 +709,70 @@
     </div>
 
     <div class="order-section fade-in">
-      <div class="order-form">
+      <form class="order-form" name="sunday-treats-order" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="netlifyForm">
+        <p style="display:none;"><input name="bot-field"></p>
 
-        <div style="text-align:center; padding: 20px 0 10px;">
-          <p style="color:var(--muted); font-weight:300; margin-bottom:32px; font-size:0.95rem; line-height:1.8;">
-            Fill out our quick order form — takes under a minute.<br>
-            We'll confirm within 24 hours and arrange payment from there.
-          </p>
-          <a class="btn" href="https://forms.gle/QGvcCNBFvnM36obY8" target="_blank" rel="noopener"
-             style="padding:16px 42px; font-size:1rem; display:inline-block;">
-            📋 Place an Order
-          </a>
-          <p style="margin-top:18px; font-size:0.8rem; color:var(--muted); font-weight:300;">
-            Opens a quick Google Form — no account needed
-          </p>
+        <!-- Success message shown after submit -->
+        <div class="form-success" id="formSuccess">
+          <div class="success-icon">🍪</div>
+          <h3>Order request received!</h3>
+          <p>Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.</p>
+        </div>
+
+        <!-- Netlify Form -->
+        <div id="orderForm">
+          <input type="hidden" name="form-name" value="sunday-treats-order">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fname">Your Name</label>
+              <input type="text" id="fname" name="name" placeholder="Jane Smith" required>
+            </div>
+            <div class="form-group">
+              <label for="femail">Email Address</label>
+              <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fphone">Phone (optional)</label>
+              <input type="tel" id="fphone" name="phone" placeholder="(720) 555-0123">
+            </div>
+            <div class="form-group">
+              <label for="fdate">Date Needed</label>
+              <input type="date" id="fdate" name="date-needed" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="fitem">What would you like?</label>
+              <select id="fitem" name="item" required>
+                <option value="">Select an item...</option>
+                <option>Cookie Platter — Starting at $18</option>
+                <option>Vanilla Specialties</option>
+                <option>Custom Order</option>
+                <option>Multiple items / not sure yet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="fqty">Approx. Quantity / Size</label>
+              <input type="text" id="fqty" name="quantity" placeholder="e.g. 1 platter for 10 people">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group full">
+              <label for="fnotes">Special requests or details</label>
+              <textarea id="fnotes" name="notes" placeholder="Allergies, event type, flavors you love, delivery vs. pickup..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-submit">
+            <button type="submit" class="btn">Send Order Request</button>
+            <span class="form-note">No payment now — we'll confirm &amp; invoice you after.</span>
+          </div>
         </div>
       </div>
 
@@ -762,43 +812,28 @@
       setInterval(() => goTo((current + 1) % slides.length), 4500);
     }
 
-    // Order form
-    function submitOrder() {
-      const name  = document.getElementById("fname").value.trim();
-      const email = document.getElementById("femail").value.trim();
-      const item  = document.getElementById("fitem").value;
+    // Netlify form — AJAX submit so customer never leaves the page
+    const netlifyForm = document.getElementById("netlifyForm");
+    if (netlifyForm) {
+      netlifyForm.addEventListener("submit", function(e) {
+        e.preventDefault();
+        const formData = new FormData(netlifyForm);
 
-      if (!name || !email) {
-        alert("Please enter your name and email so we can follow up!");
-        return;
-      }
-      if (!item) {
-        alert("Please select what you would like to order.");
-        return;
-      }
-
-      const phone = document.getElementById("fphone").value.trim();
-      const qty   = document.getElementById("fqty").value.trim();
-      const date  = document.getElementById("fdate").value;
-      const notes = document.getElementById("fnotes").value.trim();
-
-      const subject = encodeURIComponent("New Order Request from " + name);
-      const body = encodeURIComponent(
-        "Name: " + name + "\n" +
-        "Email: " + email + "\n" +
-        (phone ? "Phone: " + phone + "\n" : "") +
-        "Item: " + item + "\n" +
-        (qty   ? "Quantity: " + qty + "\n" : "") +
-        (date  ? "Date Needed: " + date + "\n" : "") +
-        (notes ? "\nNotes:\n" + notes : "")
-      );
-
-      window.location.href = "mailto:sundaytreatllc@gmail.com?subject=" + subject + "&body=" + body;
-
-      setTimeout(() => {
-        document.getElementById("orderForm").style.display = "none";
-        document.getElementById("formSuccess").style.display = "block";
-      }, 800);
+        fetch("/", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams(formData).toString()
+        })
+        .then(() => {
+          document.getElementById("orderForm").style.display = "none";
+          const success = document.getElementById("formSuccess");
+          success.style.display = "block";
+          success.scrollIntoView({ behavior: "smooth", block: "center" });
+        })
+        .catch(() => {
+          alert("Something went wrong — please email us directly at sundaytreatllc@gmail.com");
+        });
+      });
     }
 
     // Fade-in on scroll
