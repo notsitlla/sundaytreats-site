@@ -3,255 +3,422 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sunday Treats Bakery</title>
+  <title>Sunday Treats Bakery | Fresh Baked Cookies & Pastries | Littleton, CO</title>
+  <meta name="description" content="Sunday Treats is a Littleton, CO bakery specializing in handmade cookie platters, vanilla specialties, and custom dessert orders for offices, events, and gifting in Denver, Highlands Ranch, and surrounding areas.">
+  <meta name="keywords" content="bakery Littleton CO, cookie platters Denver, office treats Highlands Ranch, custom dessert orders, fresh baked cookies Colorado">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
   <style>
-    *{
-      box-sizing:border-box;
-      margin:0;
-      padding:0;
+    :root {
+      --cream:    #faf6f1;
+      --warm:     #f2e9df;
+      --rose:     #c9857a;
+      --rose-dk:  #a86b61;
+      --brown:    #6b4c48;
+      --brown-lt: #9c7570;
+      --text:     #4a3230;
+      --muted:    #8a6e6a;
+      --border:   #e5d8d0;
+      --card:     #fffcf9;
     }
 
-    body{
-      font-family: Georgia, "Times New Roman", serif;
-      background:#f7f1ec;
-      color:#5f4a46;
-      line-height:1.6;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      line-height: 1.65;
+      overflow-x: hidden;
     }
 
-    img{
-      max-width:100%;
-      display:block;
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      background: var(--rose);
+      color: #fff;
+      text-align: center;
+      padding: 9px 16px;
+      font-size: 0.82rem;
+      letter-spacing: .04em;
+      font-weight: 500;
     }
 
-    .topbar{
-      background:#c79286;
-      color:white;
-      text-align:center;
-      padding:10px;
-      font-family:Arial, sans-serif;
-      font-size:0.9rem;
+    /* ── HEADER ── */
+    header {
+      background: var(--cream);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
-    header{
-      background:#f9f4ef;
-      border-bottom:1px solid #e7ddd6;
-      padding:22px 6%;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.75rem;
+      color: var(--brown);
+      line-height: 1;
+    }
+    .logo span {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--brown-lt);
+      font-weight: 400;
+      margin-top: 3px;
     }
 
-    .logo{
-      font-size:2rem;
-      color:#7e5b55;
+    nav {
+      display: flex;
+      gap: 30px;
+      align-items: center;
+    }
+    nav a {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+      letter-spacing: .02em;
+      transition: color .2s;
+    }
+    nav a:hover { color: var(--rose); }
+
+    .btn {
+      background: var(--rose);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      letter-spacing: .02em;
+      transition: background .2s, transform .15s;
+      display: inline-block;
+    }
+    .btn:hover { background: var(--rose-dk); transform: translateY(-1px); }
+
+    .btn-ghost {
+      border: 1.5px solid var(--border);
+      color: var(--brown);
+      padding: 11px 22px;
+      border-radius: 4px;
+      font-weight: 500;
+      font-size: 0.88rem;
+      transition: border-color .2s, color .2s;
+      display: inline-block;
+    }
+    .btn-ghost:hover { border-color: var(--rose); color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      align-items: center;
+      gap: 60px;
+      padding: 90px 6% 80px;
     }
 
-    .logo span{
-      display:block;
-      font-size:0.9rem;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      font-family:Arial, sans-serif;
-      color:#b18b82;
+    .hero-kicker {
+      display: inline-block;
+      font-size: 0.75rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 500;
+      margin-bottom: 18px;
+      padding: 5px 12px;
+      background: rgba(201,133,122,.1);
+      border-radius: 20px;
     }
 
-    nav{
-      display:flex;
-      gap:28px;
-      align-items:center;
-      font-family:Arial, sans-serif;
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      color: var(--brown);
+      line-height: 1.1;
+      margin-bottom: 22px;
     }
 
-    nav a{
-      color:#6c5651;
-      text-decoration:none;
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose);
     }
 
-    nav a:hover{
-      color:#b77a6c;
+    .hero p {
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 34px;
+      max-width: 440px;
+      font-weight: 300;
+      line-height: 1.75;
     }
 
-    .btn{
-      background:#c79286;
-      color:white;
-      padding:12px 22px;
-      border-radius:3px;
-      font-weight:600;
-      text-decoration:none;
-      font-family:Arial, sans-serif;
+    .hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ── TRUST STRIP ── */
+    .trust-strip {
+      background: var(--warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 20px 6%;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
+    }
+    .trust-icon {
+      font-size: 1.2rem;
     }
 
-    .btn:hover{
-      background:#b27b70;
+    /* ── SLIDESHOW ── */
+    .slideshow {
+      position: relative;
+      width: 100%;
+      height: 480px;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(100,60,50,.14);
     }
 
-    .btn-outline{
-      border:1px solid #bfa39b;
-      color:#7c625e;
-      padding:12px 22px;
-      font-family:Arial, sans-serif;
-      text-decoration:none;
+    .slide {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 1.4s ease-in-out;
+      pointer-events: none;
+    }
+    .slide.active { opacity: 1; pointer-events: auto; }
+    .slide img { width: 100%; height: 100%; object-fit: cover; }
+    .contain-image { object-fit: contain !important; background: #fffaf7; padding: 30px; }
+
+    .slide-dots {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px;
+      z-index: 10;
+    }
+    .dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.5);
+      border: none; cursor: pointer;
+      padding: 0; transition: background .3s, transform .3s;
+    }
+    .dot.active { background: #fff; transform: scale(1.3); }
+
+    /* ── SECTION ── */
+    .section { padding: 90px 6%; }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-label {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--rose);
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+    .section-title h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      color: var(--brown);
+      line-height: 1.15;
+    }
+    .section-title p {
+      color: var(--muted);
+      margin-top: 14px;
+      font-weight: 300;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
-    .hero{
-      display:grid;
-      grid-template-columns:1fr 1.2fr;
-      align-items:center;
-      gap:60px;
-      padding:80px 6%;
+    /* ── MENU CARDS ── */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .hero-kicker{
-      font-family:Arial, sans-serif;
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      color:#b18b82;
-      font-size:.8rem;
-      margin-bottom:20px;
+    .menu-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 34px 28px;
+      transition: transform .25s, box-shadow .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: var(--rose);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s;
+    }
+    .menu-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(100,60,50,.1); }
+    .menu-card:hover::before { transform: scaleX(1); }
+
+    .card-emoji { font-size: 2rem; margin-bottom: 14px; }
+    .menu-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      color: var(--brown);
+      margin-bottom: 10px;
+    }
+    .menu-card p { color: var(--muted); font-size: 0.92rem; font-weight: 300; line-height: 1.65; }
+    .price {
+      margin-top: 18px;
+      font-weight: 700;
+      color: var(--rose);
+      font-size: 1rem;
+      letter-spacing: .01em;
     }
 
-    .hero h1{
-      font-size:clamp(2.5rem,5vw,4.5rem);
-      color:#7c625e;
-      line-height:1.05;
-      margin-bottom:20px;
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--warm);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 80px 6%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-strip h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--brown);
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+    .about-strip p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 12px; }
+    .values-list { list-style: none; margin-top: 20px; display: flex; flex-direction: column; gap: 12px; }
+    .values-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.9rem; color: var(--brown); font-weight: 500;
+    }
+    .values-list li::before {
+      content: '✦';
+      color: var(--rose);
+      font-size: 0.7rem;
     }
 
-    .hero p{
-      font-family:Arial, sans-serif;
-      margin-bottom:30px;
-      color:#6f5d59;
+    /* ── FAQ ── */
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .faq-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 26px;
+    }
+    .faq-item h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+    .faq-item p { color: var(--muted); font-size: 0.88rem; font-weight: 300; line-height: 1.7; }
+
+    /* ── CONTACT ── */
+    .contact-box {
+      max-width: 640px;
+      margin: 0 auto;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 52px 48px;
+      text-align: center;
+    }
+    .contact-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--brown);
+      margin-bottom: 14px;
+    }
+    .contact-box p { color: var(--muted); font-weight: 300; margin-bottom: 8px; font-size: 0.95rem; }
+    .contact-box a.email-link {
+      color: var(--rose);
+      font-weight: 500;
+    }
+    .contact-box .btn { margin-top: 28px; padding: 14px 34px; font-size: 0.95rem; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,255,255,.55);
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 0.82rem;
+      letter-spacing: .03em;
+    }
+    footer a { color: rgba(255,255,255,.75); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero { grid-template-columns: 1fr; text-align: center; gap: 40px; padding: 60px 6%; }
+      .hero p { max-width: 100%; }
+      .hero-buttons { justify-content: center; }
+      .hero-kicker { margin-left: auto; margin-right: auto; }
+      .slideshow { height: 320px; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .about-strip { grid-template-columns: 1fr; gap: 32px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .trust-strip { gap: 24px; }
+      .contact-box { padding: 36px 24px; }
     }
 
-    .hero-buttons{
-      display:flex;
-      gap:14px;
+    /* ── FADE-IN ANIMATION ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .65s ease, transform .65s ease;
     }
-
-    .slideshow{
-      position:relative;
-      width:100%;
-      max-width:900px;
-      height:500px;
-      margin:40px auto;
-      overflow:hidden;
-      border-radius:18px;
-      box-shadow:0 10px 30px rgba(0, 0, 0, 0.12);
-      background:#fff;
-    }
-
-    .slide{
-      position:absolute;
-      inset:0;
-      opacity:0;
-      transition:opacity 1.2s ease-in-out;
-      pointer-events:none;
-    }
-
-    .slide.active{
-      opacity:1;
-      pointer-events:auto;
-    }
-
-    .slide img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .contain-image{
-      object-fit:contain !important;
-      background:#fffaf7;
-      padding:30px;
-    }
-
-    .section{
-      padding:80px 6%;
-    }
-
-    .section-title{
-      text-align:center;
-      margin-bottom:50px;
-    }
-
-    .section-title h2{
-      font-size:2.4rem;
-      color:#7c625e;
-    }
-
-    .menu-grid{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:24px;
-    }
-
-    .menu-card{
-      background:#fffaf6;
-      padding:28px;
-      border:1px solid #eadfd8;
-      border-radius:12px;
-    }
-
-    .menu-card h3{
-      margin-bottom:10px;
-      color:#7c625e;
-    }
-
-    .menu-card p{
-      font-family:Arial, sans-serif;
-      color:#6f5d59;
-    }
-
-    .price{
-      margin-top:10px;
-      font-family:Arial, sans-serif;
-      font-weight:700;
-      color:#b77a6c;
-    }
-
-    .contact-box{
-      max-width:800px;
-      margin:auto;
-      background:#fffaf6;
-      border:1px solid #eadfd8;
-      padding:40px;
-      border-radius:14px;
-      text-align:center;
-    }
-
-    footer{
-      background:#ead7ce;
-      text-align:center;
-      padding:24px;
-      font-family:Arial, sans-serif;
-    }
-
-    @media (max-width:900px){
-      .hero{
-        grid-template-columns:1fr;
-        text-align:center;
-      }
-
-      .hero-buttons{
-        justify-content:center;
-      }
-
-      .slideshow{
-        height:340px;
-      }
-
-      .menu-grid{
-        grid-template-columns:1fr;
-      }
-    }
+    .fade-in.visible { opacity: 1; transform: none; }
   </style>
 </head>
 <body>
 
   <div class="topbar">
-    Fresh baked treats for offices, events, and special orders in Littleton and surrounding areas.
+    🍪 Now taking orders for summer events &amp; office gatherings — Littleton, Highlands Ranch &amp; Denver
   </div>
 
   <header>
@@ -259,100 +426,191 @@
       Sunday Treats
       <span>Bakery</span>
     </div>
-
     <nav>
       <a href="#home">Home</a>
       <a href="#menu">Menu</a>
-      <a href="#contact">Contact</a>
-      <a class="btn" href="#contact">Order Now</a>
+      <a href="#about">About</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact" class="btn">Order Now</a>
     </nav>
   </header>
 
+  <!-- HERO -->
   <section class="hero" id="home">
     <div>
-      <div class="hero-kicker">Handmade baked goods</div>
-
-      <h1>Elegant treats for gatherings, gifting, and office meetings.</h1>
-
+      <div class="hero-kicker">Handmade in Littleton, CO</div>
+      <h1>Treats that make <em>every moment</em> feel special.</h1>
       <p>
-        Sunday Treats creates fresh baked cookies, pastry, desserts, and small-batch specialties.
-        Homemade, quality ingredients, beautifully made.
+        From beautifully arranged cookie platters to custom gift boxes —
+        Sunday Treats brings homemade warmth to your office, event, or celebration.
+        Fresh baked. Small batch. Made with real ingredients.
       </p>
-
       <div class="hero-buttons">
         <a class="btn" href="#menu">View Menu</a>
-        <a class="btn-outline" href="#contact">Place an Order</a>
+        <a class="btn-ghost" href="#contact">Place an Order</a>
       </div>
     </div>
 
-   <div class="slideshow">
+    <div class="slideshow">
       <div class="slide active">
-        <img src="images/cookie_plater.png" alt="Decorated cookie platter">
+        <img src="images/cookie_plater.png" alt="Decorated cookie platter from Sunday Treats Bakery in Littleton CO">
       </div>
-
       <div class="slide">
-        <img src="images/dry_cookie.png" alt="Freshly baked sugar cookie">
+        <img src="images/dry_cookie.png" alt="Freshly baked sugar cookie from Sunday Treats">
       </div>
-
       <div class="slide">
-        <img src="images/vanilla_extract.png" alt="Homemade vanilla extract" class="contain-image">
+        <img src="images/vanilla_extract.png" alt="Small-batch homemade vanilla extract from Sunday Treats" class="contain-image">
+      </div>
+      <div class="slide-dots">
+        <button class="dot active" data-index="0" aria-label="Slide 1"></button>
+        <button class="dot" data-index="1" aria-label="Slide 2"></button>
+        <button class="dot" data-index="2" aria-label="Slide 3"></button>
       </div>
     </div>
   </section>
 
+  <!-- TRUST STRIP -->
+  <div class="trust-strip fade-in">
+    <div class="trust-item"><span class="trust-icon">🏡</span> Locally made in Littleton, CO</div>
+    <div class="trust-item"><span class="trust-icon">🥄</span> Real, quality ingredients</div>
+    <div class="trust-item"><span class="trust-icon">🎁</span> Gift-ready presentation</div>
+    <div class="trust-item"><span class="trust-icon">📦</span> Office &amp; event orders welcome</div>
+    <div class="trust-item"><span class="trust-icon">✉️</span> Easy email ordering</div>
+  </div>
+
+  <!-- MENU -->
   <section class="section" id="menu">
-    <div class="section-title">
+    <div class="section-title fade-in">
+      <div class="section-label">What we make</div>
       <h2>Signature Menu</h2>
+      <p>Crowd-pleasing favorites for meetings, gifting, and events — all made fresh to order.</p>
     </div>
 
     <div class="menu-grid">
-      <div class="menu-card">
+      <div class="menu-card fade-in">
+        <div class="card-emoji">🍪</div>
         <h3>Cookie Platters</h3>
-        <p>Assorted trays of fresh baked cookies perfect for office meetings.</p>
+        <p>Beautifully arranged trays of assorted fresh baked cookies — perfect for office meetings, client appreciation, team celebrations, and group events. Each platter is thoughtfully arranged and ready to impress.</p>
         <div class="price">Starting at $18</div>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card fade-in">
+        <div class="card-emoji">🌿</div>
         <h3>Vanilla Specialties</h3>
-        <p>Small-batch vanilla gifts and dessert-inspired offerings.</p>
+        <p>Small-batch vanilla gifts including homemade vanilla extract and dessert-inspired offerings. Elevated and memorable — ideal for gifting, hostess presents, or adding something unexpected to an order.</p>
         <div class="price">Seasonal pricing</div>
       </div>
 
-      <div class="menu-card">
+      <div class="menu-card fade-in">
+        <div class="card-emoji">✨</div>
         <h3>Custom Orders</h3>
-        <p>Need something tailored for an event? We can create a custom selection.</p>
+        <p>Planning a corporate event, team gathering, birthday, or special occasion? We can create a fully custom selection tailored to your theme, quantity, and preferences. Reach out to discuss your vision.</p>
         <div class="price">Request a quote</div>
       </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <div class="about-strip" id="about">
+    <div class="fade-in">
+      <h2>Made with care, meant to be shared.</h2>
+      <p>
+        Sunday Treats was built around one idea: that a beautifully made, homemade treat can turn
+        an ordinary moment into something memorable.
+      </p>
+      <p>
+        We bake in small batches using quality ingredients, focusing on presentation and flavor
+        that feels warm, not mass-produced. Whether it's a weekly office order or a one-time
+        custom gift box, every order gets the same attention.
+      </p>
+      <ul class="values-list">
+        <li>Small-batch baking — never mass-produced</li>
+        <li>Thoughtful presentation for gifting &amp; events</li>
+        <li>Serving Littleton, Highlands Ranch &amp; Denver</li>
+        <li>Personal, easy email ordering process</li>
+      </ul>
+    </div>
+    <div class="fade-in" style="text-align:center;">
+      <img src="images/cookie_plater.png" alt="Sunday Treats cookie platter" style="border-radius:16px; box-shadow: 0 12px 32px rgba(100,60,50,.13); max-height:380px; width:100%; object-fit:cover;">
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <section class="section" id="faq">
+    <div class="section-title fade-in">
+      <div class="section-label">Common questions</div>
+      <h2>FAQ</h2>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item fade-in">
+        <h4>How do I place an order?</h4>
+        <p>Simply send us an email at sundaytreatllc@gmail.com with your desired items, quantity, and date needed. We'll get back to you quickly to confirm and finalize details.</p>
+      </div>
+      <div class="faq-item fade-in">
+        <h4>How much notice do you need?</h4>
+        <p>We ask for at least 48–72 hours notice for standard orders. Custom or large event orders may require more lead time — reach out early and we'll do our best!</p>
+      </div>
+      <div class="faq-item fade-in">
+        <h4>What areas do you serve?</h4>
+        <p>We serve Littleton, Highlands Ranch, and the greater Denver metro area. Contact us to confirm delivery or pickup options for your location.</p>
+      </div>
+      <div class="faq-item fade-in">
+        <h4>Do you do recurring office orders?</h4>
+        <p>Yes! We love working with local businesses on regular treat schedules. Ask us about setting up a weekly or monthly standing order for your team.</p>
+      </div>
+      <div class="faq-item fade-in">
+        <h4>What's included in a cookie platter?</h4>
+        <p>Platters include an assortment of our freshly baked cookies — flavors vary by season. Let us know if you have any preferences, dietary needs, or favorites.</p>
+      </div>
+      <div class="faq-item fade-in">
+        <h4>Can I customize my order?</h4>
+        <p>Absolutely. From flavors to packaging and presentation, we're happy to tailor your order for your event or recipient. Just tell us what you have in mind.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
   <section class="section" id="contact">
-    <div class="contact-box">
-      <h2>Order & Contact</h2>
-      <p>Email: <a href="mailto:sundaytreat@gmail.com">sundaytreat@gmail.com</a></p>
-      <p>Serving Littleton, Highlands Ranch, and the greater Denver area.</p>
-      <br>
-      <a class="btn" href="mailto:sundaytreat@gmail.com">Email to Order</a>
+    <div class="contact-box fade-in">
+      <h2>Ready to order?</h2>
+      <p>We'd love to bake something special for you.</p>
+      <p>📧 <a href="mailto:sundaytreatllc@gmail.com" class="email-link">sundaytreatllc@gmail.com</a></p>
+      <p style="margin-top:8px;">📍 Serving Littleton, Highlands Ranch &amp; greater Denver</p>
+      <a class="btn" href="mailto:sundaytreatllc@gmail.com">Email to Order</a>
     </div>
   </section>
 
   <footer>
-    © 2026 Sunday Treats Bakery · Fresh baked cookies & pastries for offices and events
+    © 2026 Sunday Treats Bakery &nbsp;·&nbsp; Fresh baked cookies &amp; pastries for offices and events in Littleton, CO
+    &nbsp;·&nbsp; <a href="mailto:sundaytreatllc@gmail.com">sundaytreatllc@gmail.com</a>
   </footer>
 
   <script>
+    // Slideshow
     const slides = document.querySelectorAll(".slide");
-    let currentSlide = 0;
+    const dots   = document.querySelectorAll(".dot");
+    let current  = 0;
 
-    function showNextSlide() {
-      slides[currentSlide].classList.remove("active");
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add("active");
+    function goTo(n) {
+      slides[current].classList.remove("active");
+      dots[current].classList.remove("active");
+      current = n;
+      slides[current].classList.add("active");
+      dots[current].classList.add("active");
     }
+
+    dots.forEach(d => d.addEventListener("click", () => goTo(+d.dataset.index)));
 
     if (slides.length > 0) {
-      setInterval(showNextSlide, 4000);
+      setInterval(() => goTo((current + 1) % slides.length), 4500);
     }
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll(".fade-in").forEach(el => observer.observe(el));
   </script>
 
 </body>
