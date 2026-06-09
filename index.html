@@ -189,6 +189,7 @@
       font-size: 1.2rem;
     }
 
+
     /* ── SLIDESHOW ── */
     .slideshow {
       position: relative;
@@ -562,7 +563,7 @@
       <a href="#menu">Menu</a>
       <a href="#about">About</a>
       <a href="#faq">FAQ</a>
-      <a href="#contact" class="btn">Order Now</a>
+      <a href="#contact" class="btn">Place an Order</a>
     </nav>
   </header>
 
@@ -621,29 +622,99 @@
       <p>Crowd-pleasing favorites for meetings, gifting, and events — all made fresh to order.</p>
     </div>
 
-    <div class="menu-grid">
-      <div class="menu-card fade-in">
-        <div class="card-emoji"></div>
-        <h3>Cookie Platters</h3>
-        <p>Beautifully arranged trays of assorted fresh baked cookies — perfect for office meetings, client appreciation, team celebrations, and group events. Each platter is thoughtfully arranged and ready to impress.</p>
-        <div class="price">Starting at $18</div>
-      </div>
+  <div class="menu-grid">
 
-      <div class="menu-card fade-in">
-        <div class="card-emoji"></div>
-        <h3>Vanilla Specialties</h3>
-        <p>Small-batch vanilla gifts including homemade vanilla extract and dessert-inspired offerings. Elevated and memorable — ideal for gifting, hostess presents, or adding something unexpected to an order.</p>
-        <div class="price">Seasonal pricing</div>
-      </div>
+  <!-- COOKIE PLATTERS -->
 
-      <div class="menu-card fade-in">
-        <div class="card-emoji"></div>
-        <h3>Custom Orders</h3>
-        <p>Planning a corporate event, team gathering, birthday, or special occasion? We can create a fully custom selection tailored to your theme, quantity, and preferences. Reach out to discuss your vision.</p>
-        <div class="price">Request a quote</div>
-      </div>
-    </div>
-  </section>
+  <div class="menu-card fade-in" onclick="togglePlatters()" style="cursor:pointer;">
+    <div class="card-emoji"></div>
+
+```
+<h3>Cookie Platters ▼</h3>
+
+<p>
+  Beautifully arranged trays of assorted fresh baked cookies — perfect for
+  office meetings, client appreciation, team celebrations, and group events.
+  Click to view flavors and platter sizes.
+</p>
+
+<div id="platterDetails" style="display:none; margin-top:18px; text-align:left;">
+  <h4 style="margin-bottom:8px; color:var(--brown);">
+    Available Flavors
+  </h4>
+
+  <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
+    <li>Chocolate Chip</li>
+    <li>Brown Butter</li>
+    <li>Double Chocolate Chip</li>
+    <li>White Chocolate Strawberry</li>
+    <li>Kitchen Sink</li>
+  </ul>
+
+  <h4 style="margin:18px 0 8px; color:var(--brown);">
+    Tray Sizes
+  </h4>
+
+  <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
+    <li><strong>Small Tray</strong> — 12 Cookies</li>
+    <li><strong>Medium Tray</strong> — 24 Cookies</li>
+    <li><strong>Large Tray</strong> — 48 Cookies</li>
+  </ul>
+</div>
+
+<div class="price">Click to view options</div>
+```
+
+  </div>
+
+  <!-- VANILLA SPECIALTIES -->
+
+  <div class="menu-card fade-in">
+    <div class="card-emoji"></div>
+
+```
+<h3>Vanilla Specialties</h3>
+
+<p>
+  Small-batch vanilla gifts including homemade vanilla extract and
+  dessert-inspired offerings. Elevated and memorable — ideal for gifting,
+  hostess presents, or adding something unexpected to an order.
+</p>
+
+<div class="price">Seasonal pricing</div>
+```
+
+  </div>
+
+  <!-- CUSTOM ORDERS -->
+
+  <div class="menu-card fade-in">
+    <div class="card-emoji"></div>
+
+```
+<h3>
+  <a href="#contact" style="color:inherit;">
+    Custom Orders
+  </a>
+</h3>
+
+<p>
+  Planning a corporate event, team gathering, birthday, or special
+  occasion? We can create a fully custom selection tailored to your theme,
+  quantity, and preferences.
+</p>
+
+<div class="price">
+  <a href="#contact" style="color:inherit;">
+    Place an Order →
+  </a>
+</div>
+```
+
+  </div>
+
+</div>
+
 
   <!-- ABOUT -->
   <div class="about-strip" id="about">
@@ -798,6 +869,16 @@
   </footer>
 
   <script>
+
+  function togglePlatters() {
+    const details = document.getElementById("platterDetails");
+
+    if (details.style.display === "none" || details.style.display === "") {
+      details.style.display = "block";
+    } else {
+      details.style.display = "none";
+    }
+  }
     // Slideshow
     const slides = document.querySelectorAll(".slide");
     const dots   = document.querySelectorAll(".dot");
