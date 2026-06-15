@@ -789,20 +789,42 @@
           action="https://sunday-treats-order-form.allistonwatts.workers.dev"
           method="POST">
 
-          <input type="text" name="website" style="display:none">
+    
+    <input type="text" name="website" style="display:none">
+    
+    <!-- name -->
+    <!-- email -->
+    <!-- phone -->
+    <!-- date -->
+    <!-- item -->
+    <!-- quantity -->
+    <!-- notes -->
+          
+
+<div class="form-submit">
+  <button type="submit" class="btn">
+    Send Order Request
+  </button>
+
+  <span class="form-note">
+    No payment now — we'll confirm & invoice you after.
+  </span>
+</div>
+
+</form>
+
+              <!-- Success message shown after submit -->
+
+<div class="form-success" id="formSuccess">
+  <div class="success-icon">🍪</div>
+  <h3>Order request received!</h3>
+  <p>
+    Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.
+  </p>
+</div>
 
 
-          <input 
-            type="text"
-            name="website"
-            style="display:none">
 
-        <!-- Success message shown after submit -->
-        <div class="form-success" id="formSuccess">
-          <div class="success-icon">🍪</div>
-          <h3>Order request received!</h3>
-          <p>Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.</p>
-        </div>
 
           <div class="form-row">
             <div class="form-group">
@@ -858,6 +880,7 @@
           </div>
         </div>
       </div>
+    </form>
 
       <div class="payment-strip fade-in">
         <h3>💳 How payment works</h3>
@@ -914,12 +937,21 @@
       
       const formData = new FormData(form);
       
-      const response = await fetch(
-      form.action,
-      {
-      method:"POST",
-      body:formData
-      });
+      let response;
+
+      try {
+        response = await fetch(
+          form.action,
+          {
+            method:"POST",
+            body:formData
+          }
+        );
+      }
+      catch(error) {
+        alert("Unable to submit order. Please email us.");
+        return;
+      }
       
       
       if(response.ok){
