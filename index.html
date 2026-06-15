@@ -189,7 +189,6 @@
       font-size: 1.2rem;
     }
 
-
     /* ── SLIDESHOW ── */
     .slideshow {
       position: relative;
@@ -622,99 +621,66 @@
       <p>Crowd-pleasing favorites for meetings, gifting, and events — all made fresh to order.</p>
     </div>
 
-  <div class="menu-grid">
+    <div class="menu-grid">
 
-  <!-- COOKIE PLATTERS -->
+      <!-- COOKIE PLATTERS -->
+      <div class="menu-card fade-in" onclick="togglePlatters()" style="cursor:pointer;">
+        <div class="card-emoji"></div>
+        <h3>Cookie Platters ▼</h3>
+        <p>
+          Beautifully arranged trays of assorted fresh baked cookies — perfect for
+          office meetings, client appreciation, team celebrations, and group events.
+          Click to view flavors and platter sizes.
+        </p>
+        <div id="platterDetails" style="display:none; margin-top:18px; text-align:left;">
+          <h4 style="margin-bottom:8px; color:var(--brown);">Available Flavors</h4>
+          <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
+            <li>Chocolate Chip</li>
+            <li>Brown Butter</li>
+            <li>Double Chocolate Chip</li>
+            <li>White Chocolate Strawberry</li>
+            <li>Kitchen Sink</li>
+          </ul>
+          <h4 style="margin:18px 0 8px; color:var(--brown);">Tray Sizes</h4>
+          <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
+            <li><strong>Small Tray</strong> — 12 Cookies</li>
+            <li><strong>Medium Tray</strong> — 24 Cookies</li>
+            <li><strong>Large Tray</strong> — 48 Cookies</li>
+          </ul>
+        </div>
+        <div class="price">Click to view options</div>
+      </div>
 
-  <div class="menu-card fade-in" onclick="togglePlatters()" style="cursor:pointer;">
-    <div class="card-emoji"></div>
+      <!-- VANILLA SPECIALTIES -->
+      <div class="menu-card fade-in">
+        <div class="card-emoji"></div>
+        <h3>Vanilla Specialties</h3>
+        <p>
+          Small-batch vanilla gifts including homemade vanilla extract and
+          dessert-inspired offerings. Elevated and memorable — ideal for gifting,
+          hostess presents, or adding something unexpected to an order.
+        </p>
+        <div class="price">Seasonal pricing</div>
+      </div>
 
-```
-<h3>Cookie Platters ▼</h3>
+      <!-- CUSTOM ORDERS -->
+      <div class="menu-card fade-in">
+        <div class="card-emoji"></div>
+        <h3>
+          <a href="#contact" style="color:inherit;">Custom Orders</a>
+        </h3>
+        <p>
+          Planning a corporate event, team gathering, birthday, or special
+          occasion? We can create a fully custom selection tailored to your theme,
+          quantity, and preferences.
+        </p>
+        <div class="price">
+          <a href="#contact" style="color:inherit;">Place an Order →</a>
+        </div>
+      </div>
 
-<p>
-  Beautifully arranged trays of assorted fresh baked cookies — perfect for
-  office meetings, client appreciation, team celebrations, and group events.
-  Click to view flavors and platter sizes.
-</p>
-
-<div id="platterDetails" style="display:none; margin-top:18px; text-align:left;">
-  <h4 style="margin-bottom:8px; color:var(--brown);">
-    Available Flavors
-  </h4>
-
-  <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
-    <li>Chocolate Chip</li>
-    <li>Brown Butter</li>
-    <li>Double Chocolate Chip</li>
-    <li>White Chocolate Strawberry</li>
-    <li>Kitchen Sink</li>
-  </ul>
-
-  <h4 style="margin:18px 0 8px; color:var(--brown);">
-    Tray Sizes
-  </h4>
-
-  <ul style="padding-left:18px; color:var(--muted); line-height:1.8;">
-    <li><strong>Small Tray</strong> — 12 Cookies</li>
-    <li><strong>Medium Tray</strong> — 24 Cookies</li>
-    <li><strong>Large Tray</strong> — 48 Cookies</li>
-  </ul>
-</div>
-
-<div class="price">Click to view options</div>
-```
-
-  </div>
-
-  <!-- VANILLA SPECIALTIES -->
-
-  <div class="menu-card fade-in">
-    <div class="card-emoji"></div>
-
-```
-<h3>Vanilla Specialties</h3>
-
-<p>
-  Small-batch vanilla gifts including homemade vanilla extract and
-  dessert-inspired offerings. Elevated and memorable — ideal for gifting,
-  hostess presents, or adding something unexpected to an order.
-</p>
-
-<div class="price">Seasonal pricing</div>
-```
-
-  </div>
-
-  <!-- CUSTOM ORDERS -->
-
-  <div class="menu-card fade-in">
-    <div class="card-emoji"></div>
-
-```
-<h3>
-  <a href="#contact" style="color:inherit;">
-    Custom Orders
-  </a>
-</h3>
-
-<p>
-  Planning a corporate event, team gathering, birthday, or special
-  occasion? We can create a fully custom selection tailored to your theme,
-  quantity, and preferences.
-</p>
-
-<div class="price">
-  <a href="#contact" style="color:inherit;">
-    Place an Order →
-  </a>
-</div>
-```
-
-  </div>
-
-</div>
-
+    </div>
+  </section>
 
   <!-- ABOUT -->
   <div class="about-strip" id="about">
@@ -784,111 +750,77 @@
     </div>
 
     <div class="order-section fade-in">
-        <form class="order-form"
-          id="orderForm"
-          action="https://sunday-treats-order-form.allistonwatts.workers.dev"
-          method="POST">
-
-    
-    <input type="text" name="website" style="display:none">
-    
-    <!-- name -->
-    <!-- email -->
-    <!-- phone -->
-    <!-- date -->
-    <!-- item -->
-    <!-- quantity -->
-    <!-- notes -->
-          
-
-<div class="form-submit">
-  <button type="submit" class="btn">
-    Send Order Request
-  </button>
-
-  <span class="form-note">
-    No payment now — we'll confirm & invoice you after.
-  </span>
-</div>
-
-</form>
-
-              <!-- Success message shown after submit -->
-
-<div class="form-success" id="formSuccess">
-  <div class="success-icon">🍪</div>
-  <h3>Order request received!</h3>
-  <p>
-    Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.
-  </p>
-</div>
-
-
-
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fname">Your Name</label>
-              <input type="text" id="fname" name="name" placeholder="Jane Smith" required>
-            </div>
-            <div class="form-group">
-              <label for="femail">Email Address</label>
-              <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
-            </div>
+      <form class="order-form" id="orderForm" action="https://sunday-treats-order-form.allistonwatts.workers.dev" method="POST">
+        <input type="text" name="website" style="display:none">
+        
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fname">Your Name</label>
+            <input type="text" id="fname" name="name" placeholder="Jane Smith" required>
           </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fphone">Phone (optional)</label>
-              <input type="tel" id="fphone" name="phone" placeholder="(720) 555-0123">
-            </div>
-            <div class="form-group">
-              <label for="fdate">Date Needed</label>
-              <input type="date" id="fdate" name="date-needed" required>
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group">
-              <label for="fitem">What would you like?</label>
-              <select id="fitem" name="item" required>
-                <option value="">Select an item...</option>
-                <option>Small Tray - 12 Cookies</option>
-                <option>Medium Tray - 24 Cookies</option>
-                <option>Large Tray - 48 Cookies</option>
-                <option>Vanilla Specialties</option>
-                <option>Custom Order</option>
-                <option>Multiple items / not sure yet</option>
-              </select>
-            </div>
-            <div class="form-group">
-              <label for="fqty">Approx. Quantity / Size</label>
-              <input type="text" id="fqty" name="quantity" placeholder="e.g. 1 platter for 10 people">
-            </div>
-          </div>
-
-          <div class="form-row">
-            <div class="form-group full">
-              <label for="fnotes">Special requests or details</label>
-              <textarea id="fnotes" name="notes" placeholder="Allergies, event type, flavors you love, delivery vs. pickup..."></textarea>
-            </div>
-          </div>
-
-          <div class="form-submit">
-            <button type="submit" class="btn">Send Order Request</button>
-            <span class="form-note">No payment now — we'll confirm &amp; invoice you after.</span>
+          <div class="form-group">
+            <label for="femail">Email Address</label>
+            <input type="email" id="femail" name="email" placeholder="jane@example.com" required>
           </div>
         </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fphone">Phone (optional)</label>
+            <input type="tel" id="fphone" name="phone" placeholder="(720) 555-0123">
+          </div>
+          <div class="form-group">
+            <label for="fdate">Date Needed</label>
+            <input type="date" id="fdate" name="date-needed" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="fitem">What would you like?</label>
+            <select id="fitem" name="item" required>
+              <option value="">Select an item...</option>
+              <option>Small Tray - 12 Cookies</option>
+              <option>Medium Tray - 24 Cookies</option>
+              <option>Large Tray - 48 Cookies</option>
+              <option>Vanilla Specialties</option>
+              <option>Custom Order</option>
+              <option>Multiple items / not sure yet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="fqty">Approx. Quantity / Size</label>
+            <input type="text" id="fqty" name="quantity" placeholder="e.g. 1 platter for 10 people">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group full">
+            <label for="fnotes">Special requests or details</label>
+            <textarea id="fnotes" name="notes" placeholder="Allergies, event type, flavors you love, delivery vs. pickup..."></textarea>
+          </div>
+        </div>
+
+        <div class="form-submit">
+          <button type="submit" class="btn">Send Order Request</button>
+          <span class="form-note">No payment now — we'll confirm &amp; invoice you after.</span>
+        </div>
+      </form>
+
+      <!-- Success message shown after submit -->
+      <div class="form-success" id="formSuccess">
+        <div class="success-icon">🍪</div>
+        <h3>Order request received!</h3>
+        <p>Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.</p>
       </div>
-    </form>
 
       <div class="payment-strip fade-in">
         <h3>💳 How payment works</h3>
         <p>Once your order is confirmed, we'll send a total and you can pay via any of these easy options:</p>
         <div class="payment-methods">
-          <div class="payment-pill"><span class="pill-icon"></span> Venmo <span style="color:var(--muted);font-weight:300;font-size:.82rem;">@SundayTreats</span></div>
-          <div class="payment-pill"><span class="pill-icon"></span> Zelle <span style="color:var(--muted);font-weight:300;font-size:.82rem;">info@sunday-treats.com</span></div>
-          <div class="payment-pill"><span class="pill-icon"></span> Cash on delivery</div>
+          <div class="payment-pill">Venmo <span style="color:var(--muted);font-weight:300;font-size:.82rem; margin-left: 5px;">@SundayTreats</span></div>
+          <div class="payment-pill">Zelle <span style="color:var(--muted);font-weight:300;font-size:.82rem; margin-left: 5px;">info@sunday-treats.com</span></div>
+          <div class="payment-pill">Cash on delivery</div>
         </div>
       </div>
     </div>
@@ -900,16 +832,15 @@
   </footer>
 
   <script>
-
-  function togglePlatters() {
-    const details = document.getElementById("platterDetails");
-
-    if (details.style.display === "none" || details.style.display === "") {
-      details.style.display = "block";
-    } else {
-      details.style.display = "none";
+    function togglePlatters() {
+      const details = document.getElementById("platterDetails");
+      if (details.style.display === "none" || details.style.display === "") {
+        details.style.display = "block";
+      } else {
+        details.style.display = "none";
+      }
     }
-  }
+
     // Slideshow
     const slides = document.querySelectorAll(".slide");
     const dots   = document.querySelectorAll(".dot");
@@ -928,23 +859,20 @@
       setInterval(() => goTo((current + 1) % slides.length), 4500);
     }
 
-    //  submit so customer never leaves the page
+    // Submit via AJAX so customer never leaves the page
     const form = document.getElementById("orderForm");
 
-      form.addEventListener("submit", async function(e){
-      
+    form.addEventListener("submit", async function(e){
       e.preventDefault();
-      
       const formData = new FormData(form);
-      
       let response;
 
       try {
         response = await fetch(
           form.action,
           {
-            method:"POST",
-            body:formData
+            method: "POST",
+            body: formData
           }
         );
       }
@@ -953,25 +881,13 @@
         return;
       }
       
-      
       if(response.ok){
-      
-      document.getElementById("orderForm").style.display="none";
-      
-      document.getElementById("formSuccess")
-      .style.display="block";
-      
+        document.getElementById("orderForm").style.display = "none";
+        document.getElementById("formSuccess").style.display = "block";
+      } else {
+        alert("Something went wrong. Please email us.");
       }
-      
-      else{
-      
-      alert(
-      "Something went wrong. Please email us."
-      );
-      
-      }
-      
-      });
+    });
 
     // Fade-in on scroll
     const observer = new IntersectionObserver(entries => {
