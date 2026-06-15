@@ -784,8 +784,18 @@
     </div>
 
     <div class="order-section fade-in">
-      <form class="order-form" name="sunday-treats-order" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" id="netlifyForm">
-        <p style="display:none;"><input name="bot-field"></p>
+        <form class="order-form"
+          id="orderForm"
+          action="https://sunday-treats-order-form.allistonwatts.workers.dev"
+          method="POST">
+
+          <input type="text" name="website" style="display:none">
+
+
+          <input 
+            type="text"
+            name="website"
+            style="display:none">
 
         <!-- Success message shown after submit -->
         <div class="form-success" id="formSuccess">
@@ -793,10 +803,6 @@
           <h3>Order request received!</h3>
           <p>Thanks! We'll follow up at your email within 24 hours to confirm details and arrange payment.</p>
         </div>
-
-        <!-- Netlify Form -->
-        <div id="orderForm">
-          <input type="hidden" name="form-name" value="sunday-treats-order">
 
           <div class="form-row">
             <div class="form-group">
@@ -825,9 +831,9 @@
               <label for="fitem">What would you like?</label>
               <select id="fitem" name="item" required>
                 <option value="">Select an item...</option>
-                <option>Small Tray - 12 Cookies/option>
-                <option>Medium Tray - 24 Cookies/option>
-                <option>Large Tray - 48 Cookies/option>
+                <option>Small Tray - 12 Cookies</option>
+                <option>Medium Tray - 24 Cookies</option>
+                <option>Large Tray - 48 Cookies</option>
                 <option>Vanilla Specialties</option>
                 <option>Custom Order</option>
                 <option>Multiple items / not sure yet</option>
@@ -899,29 +905,41 @@
       setInterval(() => goTo((current + 1) % slides.length), 4500);
     }
 
-    // Netlify form — AJAX submit so customer never leaves the page
-    const netlifyForm = document.getElementById("netlifyForm");
-    if (netlifyForm) {
-      netlifyForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        const formData = new FormData(netlifyForm);
+    //  submit so customer never leaves the page
+    const form = document.getElementById("orderForm");
 
-        fetch("/", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams(formData).toString()
-        })
-        .then(() => {
-          document.getElementById("orderForm").style.display = "none";
-          const success = document.getElementById("formSuccess");
-          success.style.display = "block";
-          success.scrollIntoView({ behavior: "smooth", block: "center" });
-        })
-        .catch(() => {
-          alert("Something went wrong — please email us directly at info@sunday-treats.com");
-        });
+      form.addEventListener("submit", async function(e){
+      
+      e.preventDefault();
+      
+      const formData = new FormData(form);
+      
+      const response = await fetch(
+      form.action,
+      {
+      method:"POST",
+      body:formData
       });
-    }
+      
+      
+      if(response.ok){
+      
+      document.getElementById("orderForm").style.display="none";
+      
+      document.getElementById("formSuccess")
+      .style.display="block";
+      
+      }
+      
+      else{
+      
+      alert(
+      "Something went wrong. Please email us."
+      );
+      
+      }
+      
+      });
 
     // Fade-in on scroll
     const observer = new IntersectionObserver(entries => {
