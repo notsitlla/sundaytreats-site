@@ -27,9 +27,9 @@
 
       // Hero rotation gallery
       const HERO_ROTATION = [
-        './images/ACTIVE/box_small_cookies_zoom.JPG',
-        './images/ACTIVE/cooling_rack.png',
-        './images/ACTIVE/zoomed.JPG'
+        'images/box_small_cookies_zoom.JPG',
+        'images/cooling_rack.png',
+        'images/zoomed.JPG'
       ];
     </script>
 
@@ -331,7 +331,7 @@
       </section>
 
       <section class="section" id="faq"><div class="faq-grid"><div><div class="kicker">Common questions</div><h2>Before you<br />take a bite.</h2></div><div class="faq-list">
-        <div class="faq"><button aria-expanded="true">How do I place an order? <span>＋</span></button><p>Add cookies and choose your flavors (in sets of 6), share a date and pickup or delivery preference, then open the email draft. We reply within 24 hours with availability and a confirmed total.</p></div>
+        <div class="faq"><button aria-expanded="true">How do I place an order? <span>＋</span></button><p>Add cookies and choose your flavors (in sets of 6), share a date and pickup or delivery preference, then submit your request. We reply within 24 hours with availability and a confirmed total.</p></div>
         <div class="faq"><button aria-expanded="false">How much notice do you need? <span>＋</span></button><p hidden>We ask for 48–72 hours notice for standard orders. Custom or large event orders may need a little more lead time.</p></div>
         <div class="faq"><button aria-expanded="false">What areas do you serve? <span>＋</span></button><p hidden>Sunday Treats serves Littleton, Highlands Ranch, and the greater Denver metro area for pickup and select delivery orders.</p></div>
         <div class="faq"><button aria-expanded="false">Can I customize my order? <span>＋</span></button><p hidden>Absolutely. You can choose any combination of our 5 signature flavors (min. 6 cookies per flavor) or request custom touches.</p></div>
@@ -339,7 +339,9 @@
       </div></div></section>
 
       <section class="contact" id="contact"><div class="section"><div class="contact-grid"><div class="contact-copy"><div class="kicker">Let's make a plan</div><h2>Ready for<br />something sweet?</h2><p>Tell us what you need. We'll reply within 24 hours with availability, ideas, and a simple next step.</p><a class="email" href="mailto:orders@sunday-treats.com">orders@sunday-treats.com</a><div class="payment"><div>↗</div><div><strong>Pay in person</strong>Payment is due on delivery or pickup. We never take payment online.</div></div></div>
-        <form class="form" id="contact-form"><div class="row"><div class="field"><label for="name">Your name</label><input id="name" name="name" required /></div><div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" required /></div></div>
+        <form class="form" id="contact-form">
+          <input type="text" name="website" style="display:none">
+          <div class="row"><div class="field"><label for="name">Your name</label><input id="name" name="name" required /></div><div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" required /></div></div>
           <div class="row"><div class="field"><label for="date">Preferred date</label><input id="date" type="date" name="date" required /></div><div class="field"><label for="fulfillment">Pickup or delivery</label><select id="fulfillment" name="fulfillment" required><option value="">Choose one</option><option>Pickup in Littleton</option><option>Delivery in Denver metro</option><option>Not sure yet</option></select></div></div>
           <div class="field"><label for="details">Your order</label><textarea id="details" name="details" placeholder="Example: 36 Small Cookies — 18 Chocolate Chip, 18 Brown Butter..."></textarea></div>
           <div class="actions"><button class="button" type="submit">Send an order request ↗</button><button class="button outline" type="button" id="contact-cart">View my order</button></div><small>No payment now — we confirm availability and final details first.</small>
@@ -647,14 +649,85 @@
       function removeItem(n) { cart.splice(n, 1); renderCart(); }
 
       function showCheckout() {
-        drawer.innerHTML = `<form class="checkout" id="checkout-form"><div class="kicker">One last thing</div><h3>Tell us how to make it yours.</h3><div class="field"><label>Your name</label><input name="name" required></div><div class="field"><label>Email address</label><input name="email" type="email" required></div><div class="row"><div class="field"><label>Preferred date</label><input name="date" type="date" required></div><div class="field"><label>Pickup or delivery</label><select name="fulfillment" required><option value="">Choose one</option><option>Pickup in Littleton</option><option>Delivery in Denver metro</option><option>Not sure yet</option></select></div></div><div class="field"><label>Additional notes / allergies</label><textarea name="notes" placeholder="Any allergies, custom packaging requests, or timing notes?"></textarea></div><button class="button" type="submit">Open email request</button><p>No payment is taken online. Payment is due on delivery or pickup after we confirm your final total.</p></form>`;
-        document.getElementById('checkout-form').onsubmit = e => {
+        drawer.innerHTML = `
+          <form class="checkout" id="checkout-form">
+            <div class="kicker">One last thing</div>
+            <h3>Tell us how to make it yours.</h3>
+            <input type="text" name="website" style="display:none">
+            <div class="field"><label>Your name</label><input name="name" required></div>
+            <div class="field"><label>Email address</label><input name="email" type="email" required></div>
+            <div class="row">
+              <div class="field"><label>Preferred date</label><input name="date" type="date" required></div>
+              <div class="field"><label>Pickup or delivery</label>
+                <select name="fulfillment" required>
+                  <option value="">Choose one</option>
+                  <option>Pickup in Littleton</option>
+                  <option>Delivery in Denver metro</option>
+                  <option>Not sure yet</option>
+                </select>
+              </div>
+            </div>
+            <div class="field"><label>Additional notes / allergies</label>
+              <textarea name="notes" placeholder="Any allergies, custom packaging requests, or timing notes?"></textarea>
+            </div>
+            <button class="button" type="submit" id="checkout-submit-btn">Send order request ↗</button>
+            <p>No payment is taken online. Payment is due on delivery or pickup after we confirm your final total.</p>
+          </form>`;
+
+        const checkoutForm = document.getElementById('checkout-form');
+        checkoutForm.onsubmit = async (e) => {
           e.preventDefault();
-          const f = new FormData(e.currentTarget);
-          const items = cart.map(i => `${i.qty} × ${i.title} (${i.category}) — $${(i.price * i.qty).toFixed(2)}\n   Flavors: ${i.flavorSummary}`).join('\n\n');
-          const text = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nPreferred date: ${f.get('date')}\nPickup / delivery: ${f.get('fulfillment')}\n\nRequested treats:\n${items}\n\nEstimated standard order total: $${total().toFixed(2)}\n\nNotes:\n${f.get('notes')}\n\nPayment: No payment taken online. Final total confirmed by email; payment is due on delivery or pickup.`;
-          location.href = 'mailto:orders@sunday-treats.com?subject=' + encodeURIComponent('Sunday Treats order request') + '&body=' + encodeURIComponent(text);
-          drawer.innerHTML = '<div class="success"><h3>Your order note is ready.</h3><p>Your email draft should be open with the full request. Send it when ready and we will reply within 24 hours.</p><button class="button" onclick="closeCart()">Back to browsing</button></div>';
+          const btn = document.getElementById('checkout-submit-btn');
+          btn.disabled = true;
+          btn.textContent = 'Sending request...';
+
+          const f = new FormData(checkoutForm);
+          const itemsSummary = cart.map(i => `${i.qty} × ${i.title} (${i.category})\nFlavors: ${i.flavorSummary}`).join('\n\n');
+          
+          const payload = {
+            name: f.get('name'),
+            email: f.get('email'),
+            'date-needed': f.get('date'),
+            fulfillment: f.get('fulfillment'),
+            item: 'Cart Order',
+            quantity: `${count()} items (Est. $${total().toFixed(2)})`,
+            notes: `${f.get('notes') || 'None'}\n\n--- ORDER ITEMS ---\n${itemsSummary}`,
+            website: f.get('website')
+          };
+
+          try {
+            const response = await fetch('https://sunday-treats-order-form.allistonwatts.workers.dev', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+              cart.length = 0;
+              document.getElementById('cart-count').textContent = '0';
+              document.getElementById('drawer-count').textContent = '0';
+              drawer.innerHTML = `
+                <div class="success">
+                  <h3>Order request received! 🍪</h3>
+                  <p>Thanks! We've received your request and will follow up by email within 24 hours to confirm details and arrange payment.</p>
+                  <button class="button" onclick="closeCart()">Back to browsing</button>
+                </div>`;
+            } else {
+              const err = await response.text();
+              console.error('Submission error:', err);
+              alert('Something went wrong submitting your order. Please email orders@sunday-treats.com');
+              btn.disabled = false;
+              btn.textContent = 'Send order request ↗';
+            }
+          } catch (err) {
+            console.error('Network error:', err);
+            alert('Unable to connect to the server. Please email orders@sunday-treats.com');
+            btn.disabled = false;
+            btn.textContent = 'Send order request ↗';
+          }
         };
       }
 
@@ -670,11 +743,53 @@
         openFlavorModal();
       };
       
-      document.getElementById('contact-form').onsubmit = e => {
+      document.getElementById('contact-form').onsubmit = async (e) => {
         e.preventDefault();
-        const f = new FormData(e.currentTarget);
-        const text = `Name: ${f.get('name')}\nEmail: ${f.get('email')}\nPreferred date: ${f.get('date')}\nPickup / delivery: ${f.get('fulfillment')}\n\nOrder details:\n${f.get('details')}`;
-        location.href = 'mailto:orders@sunday-treats.com?subject=' + encodeURIComponent('Sunday Treats order request') + '&body=' + encodeURIComponent(text);
+        const contactForm = e.currentTarget;
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Sending request...';
+
+        const f = new FormData(contactForm);
+        const payload = {
+          name: f.get('name'),
+          email: f.get('email'),
+          'date-needed': f.get('date'),
+          fulfillment: f.get('fulfillment'),
+          notes: f.get('details'),
+          item: 'Direct Form Request',
+          website: f.get('website')
+        };
+
+        try {
+          const response = await fetch('https://sunday-treats-order-form.allistonwatts.workers.dev', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (response.ok) {
+            contactForm.innerHTML = `
+              <div class="success" style="padding: 40px 20px;">
+                <h3>Order request received! 🍪</h3>
+                <p>Thanks! We'll follow up at your email within 24 hours to confirm availability and payment.</p>
+              </div>`;
+          } else {
+            const err = await response.text();
+            console.error('Submission error:', err);
+            alert('Something went wrong submitting your order. Please email orders@sunday-treats.com');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Send an order request ↗';
+          }
+        } catch (err) {
+          console.error('Network error:', err);
+          alert('Unable to connect to the server. Please email orders@sunday-treats.com');
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Send an order request ↗';
+        }
       };
 
       // Initialize order builder on page load
