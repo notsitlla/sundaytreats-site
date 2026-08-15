@@ -13,23 +13,23 @@
          ========================================== -->
     <script>
       const IMAGES = {
-        fullLogo: 'images/Full_Logo_Hoz.png',
-        heroMain: 'images/cooling_rack.png',
-        heroSmall: 'images/InOven.JPG',
-        smallBox: 'images/InOven.JPG',
-        largeBox: 'images/cookie_plater.png',
-        brownieBox: 'images/InOven.JPG',
-        giftBox: 'images/open_box.JPG',
-        storyDry: 'images/dry_cookie.png',
-        storyRack: 'images/cooling_rack.png',
-        footerLogo: 'images/Full_Logo_Hoz.png'
+        fullLogo: './images/ACTIVE/Full_Logo_Hoz.png',
+        heroMain: './images/ACTIVE/cooling_rack.png',
+        heroSmall: './images/ACTIVE/InOven.JPG',
+        smallBox: './images/ACTIVE/InOven.JPG',
+        largeBox: './images/ACTIVE/cookie_plater.png',
+        brownieBox: './images/ACTIVE/InOven.JPG',
+        giftBox: './images/ACTIVE/open_box.JPG',
+        storyDry: './images/ACTIVE/dry_cookie.png',
+        storyRack: './images/ACTIVE/cooling_rack.png',
+        footerLogo: './images/ACTIVE/Full_Logo_Hoz.png'
       };
 
       // Hero rotation gallery
       const HERO_ROTATION = [
-        'images/box_small_cookies_zoom.JPG',
-        'images/cooling_rack.png',
-        'images/zoomed.JPG'
+        './images/ACTIVE/box_small_cookies_zoom.JPG',
+        './images/ACTIVE/cooling_rack.png',
+        './images/ACTIVE/zoomed.JPG'
       ];
     </script>
 
@@ -684,25 +684,19 @@
           const f = new FormData(checkoutForm);
           const itemsSummary = cart.map(i => `${i.qty} × ${i.title} (${i.category})\nFlavors: ${i.flavorSummary}`).join('\n\n');
           
-          const payload = {
-            name: f.get('name'),
-            email: f.get('email'),
-            'date-needed': f.get('date'),
-            fulfillment: f.get('fulfillment'),
-            item: 'Cart Order',
-            quantity: `${count()} items (Est. $${total().toFixed(2)})`,
-            notes: `${f.get('notes') || 'None'}\n\n--- ORDER ITEMS ---\n${itemsSummary}`,
-            website: f.get('website')
-          };
+          const submissionData = new FormData();
+          submissionData.append('name', f.get('name') || '');
+          submissionData.append('email', f.get('email') || '');
+          submissionData.append('date-needed', f.get('date') || '');
+          submissionData.append('item', 'Cart Order');
+          submissionData.append('quantity', `${count()} items (Est. $${total().toFixed(2)})`);
+          submissionData.append('notes', `Fulfillment: ${f.get('fulfillment')}\n\nNotes: ${f.get('notes') || 'None'}\n\n--- ITEMS ORDERED ---\n${itemsSummary}`);
+          submissionData.append('website', f.get('website') || '');
 
           try {
             const response = await fetch('https://sunday-treats-order-form.allistonwatts.workers.dev', {
               method: 'POST',
-              headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-              },
-              body: JSON.stringify(payload)
+              body: submissionData
             });
 
             if (response.ok) {
@@ -717,7 +711,7 @@
                 </div>`;
             } else {
               const err = await response.text();
-              console.error('Submission error:', err);
+              console.error('Worker rejection response:', err);
               alert('Something went wrong submitting your order. Please email orders@sunday-treats.com');
               btn.disabled = false;
               btn.textContent = 'Send order request ↗';
@@ -731,11 +725,15 @@
         };
       }
 
+      // Button Triggers & Listeners
       document.getElementById('open-cart').onclick = openCart;
       document.getElementById('contact-cart').onclick = openCart;
       document.getElementById('close-cart').onclick = closeCart;
       layer.onclick = e => { if (e.target === layer) closeCart(); };
-      document.getElementById('event-request').onclick = () => { document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); setTimeout(() => document.getElementById('details').focus(), 500); };
+      document.getElementById('event-request').onclick = () => { 
+        document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); 
+        setTimeout(() => document.getElementById('details').focus(), 500); 
+      };
       document.getElementById('gift-request').onclick = () => {
         orderState.type = 'small';
         orderState.perBoxQty = 12;
@@ -743,6 +741,7 @@
         openFlavorModal();
       };
       
+      // Bottom Contact Section Form Handler
       document.getElementById('contact-form').onsubmit = async (e) => {
         e.preventDefault();
         const contactForm = e.currentTarget;
@@ -751,24 +750,19 @@
         submitBtn.textContent = 'Sending request...';
 
         const f = new FormData(contactForm);
-        const payload = {
-          name: f.get('name'),
-          email: f.get('email'),
-          'date-needed': f.get('date'),
-          fulfillment: f.get('fulfillment'),
-          notes: f.get('details'),
-          item: 'Direct Form Request',
-          website: f.get('website')
-        };
+        const submissionData = new FormData();
+        submissionData.append('name', f.get('name') || '');
+        submissionData.append('email', f.get('email') || '');
+        submissionData.append('date-needed', f.get('date') || '');
+        submissionData.append('item', 'Direct Form Request');
+        submissionData.append('quantity', 'Custom');
+        submissionData.append('notes', `Fulfillment: ${f.get('fulfillment')}\n\nDetails: ${f.get('details') || 'None'}`);
+        submissionData.append('website', f.get('website') || '');
 
         try {
           const response = await fetch('https://sunday-treats-order-form.allistonwatts.workers.dev', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify(payload)
+            body: submissionData
           });
 
           if (response.ok) {
@@ -779,7 +773,7 @@
               </div>`;
           } else {
             const err = await response.text();
-            console.error('Submission error:', err);
+            console.error('Worker rejection response:', err);
             alert('Something went wrong submitting your order. Please email orders@sunday-treats.com');
             submitBtn.disabled = false;
             submitBtn.textContent = 'Send an order request ↗';
