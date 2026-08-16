@@ -442,13 +442,13 @@
         const container = document.getElementById('size-pills');
         if (orderState.type === 'brownie') {
           container.innerHTML = `
-            <button type="button" class="pill-btn active" onclick="selectSizeQty(12, this)">12 Brownies · $40</button>
+            <button type="button" class="pill-btn active" onclick="selectSizeQty(18, this)">18 Brownies · $40</button>
           `;
         } else {
           container.innerHTML = `
             <button type="button" class="pill-btn ${orderState.perBoxQty === 12 ? 'active' : ''}" onclick="selectSizeQty(12, this)">12 Cookies · $${PRICING[orderState.type][12]}</button>
-            <button type="button" class="pill-btn ${orderState.perBoxQty === 36 ? 'active' : ''}" onclick="selectSizeQty(36, this)">36 Cookies · $${PRICING[orderState.type][36]}</button>
-            <button type="button" class="pill-btn ${orderState.perBoxQty === 48 ? 'active' : ''}" onclick="selectSizeQty(48, this)">48 Cookies · $${PRICING[orderState.type][48]}</button>
+            <button type="button" class="pill-btn ${orderState.perBoxQty === 24 ? 'active' : ''}" onclick="selectSizeQty(36, this)">24 Cookies · $${PRICING[orderState.type][24]}</button>
+            <button type="button" class="pill-btn ${orderState.perBoxQty === 36 ? 'active' : ''}" onclick="selectSizeQty(48, this)">36 Cookies · $${PRICING[orderState.type][36]}</button>
           `;
         }
       }
