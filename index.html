@@ -186,7 +186,7 @@
 
     <main>
       <section class="hero" id="home">
-        <div><div class="eyebrow">Handmade in Littleton, CO</div><h1>Handmade <em>cookies </em> &nbsp for every occasion.</h1>
+        <div><div class="eyebrow">Handmade in Littleton, CO</div><h1>Handmade <em>cookies </em> &nbsp; for every occasion.</h1>
           <p class="lede">Fresh-baked small-batch cookies made for gifts, gatherings, offices, celebrations, and everyday treats.</p>
           <div class="actions"><a class="button" href="#menu-section">Shop cookies ↗</a><a class="button outline" href="#events">Custom & event orders</a></div>
           <div class="hero-note">Simple ingredients · Baked fresh · Packed by hand</div>
@@ -198,8 +198,8 @@
       <div class="ribbon"><div class="ribbon-track"><span>fresh baked</span><span>small batch</span><span>made to share</span><span>Littleton, CO</span><span>fresh baked</span><span>small batch</span><span>made to share</span><span>Littleton, CO</span><span>fresh baked</span><span>small batch</span><span>made to share</span><span>Littleton, CO</span><span>fresh baked</span><span>small batch</span><span>made to share</span><span>Littleton, CO</span></div></div>
 
       <!-- ==========================================
-           BUILD ORDER SECTION
-           ========================================== -->
+            BUILD ORDER SECTION
+            ========================================== -->
       <section class="menu-section" id="menu-section">
         <div class="menu-wrap">
           <div class="section-head">
@@ -237,7 +237,7 @@
             <!-- Summary & Configure Trigger -->
             <div class="selection-summary">
               <div class="summary-text">
-                <strong id="summary-title">Small Cookies — 12 Box (1 box)</strong>
+                <strong id="summary-title">Small Cookies — 12 per box (1 box)</strong>
                 <span id="summary-price">$15.00 confirmed upon checkout</span>
               </div>
               <button class="btn-action" id="main-action-btn" onclick="handleConfigureOrAdd()">Configure Flavors ↗</button>
@@ -247,8 +247,8 @@
       </section>
 
       <!-- ==========================================
-           SIGNATURE RECIPES: BENTO-GRID CARDS
-           ========================================== -->
+            SIGNATURE RECIPES: BENTO-GRID CARDS
+            ========================================== -->
       <section class="section" id="flavors-section">
         <div class="section-head">
           <div>
@@ -405,8 +405,8 @@
       const BATCH_STEP = 6;
 
       const PRICING = {
-        small: { 12: 15, 24: 30, 36: 42},
-        large: { 12: 30, 18: 42},
+        small: { 12: 15, 24: 30, 36: 42 },
+        large: { 12: 30, 18: 42 },
         brownie: { 18: 40 }
       };
 
@@ -432,7 +432,10 @@
         document.querySelectorAll('#type-pills .pill-btn').forEach(b => b.classList.remove('active'));
         el.classList.add('active');
 
-        orderState.perBoxQty = 12;
+        // Reset perBoxQty to the first available size for the selected item type
+        const availableSizes = Object.keys(PRICING[type]).map(Number);
+        orderState.perBoxQty = availableSizes.includes(orderState.perBoxQty) ? orderState.perBoxQty : availableSizes[0];
+
         renderSizePills();
         resetAllocations();
         updateDisplay();
@@ -440,17 +443,14 @@
 
       function renderSizePills() {
         const container = document.getElementById('size-pills');
-        if (orderState.type === 'brownie') {
-          container.innerHTML = `
-            <button type="button" class="pill-btn active" onclick="selectSizeQty(18, this)">18 Brownies · $40</button>
-          `;
-        } else {
-          container.innerHTML = `
-            <button type="button" class="pill-btn ${orderState.perBoxQty === 12 ? 'active' : ''}" onclick="selectSizeQty(12, this)">12 Cookies · $${PRICING[orderState.type][12]}</button>
-            <button type="button" class="pill-btn ${orderState.perBoxQty === 24 ? 'active' : ''}" onclick="selectSizeQty(36, this)">24 Cookies · $${PRICING[orderState.type][24]}</button>
-            <button type="button" class="pill-btn ${orderState.perBoxQty === 36 ? 'active' : ''}" onclick="selectSizeQty(48, this)">36 Cookies · $${PRICING[orderState.type][36]}</button>
-          `;
-        }
+        const sizes = Object.keys(PRICING[orderState.type]).map(Number);
+        const itemUnit = orderState.type === 'brownie' ? 'Brownies' : 'Cookies';
+
+        container.innerHTML = sizes.map(size => {
+          const isActive = orderState.perBoxQty === size ? 'active' : '';
+          const price = PRICING[orderState.type][size];
+          return `<button type="button" class="pill-btn ${isActive}" onclick="selectSizeQty(${size}, this)">${size} ${itemUnit} · $${price}</button>`;
+        }).join('');
       }
 
       function selectSizeQty(qty, el) {
@@ -476,7 +476,7 @@
 
       function updateDisplay() {
         const label = getItemLabel();
-        const unitPrice = PRICING[orderState.type][orderState.perBoxQty];
+        const unitPrice = PRICING[orderState.type][orderState.perBoxQty] || 0;
         const totalPrice = unitPrice * orderState.numBoxes;
         const boxText = `${orderState.numBoxes} ${orderState.numBoxes === 1 ? 'box' : 'boxes'}`;
 
@@ -494,10 +494,10 @@
       function handleConfigureOrAdd() {
         if (orderState.type === 'brownie') {
           cart.push({
-            id: `brownie-12-${Date.now()}`,
+            id: `brownie-${orderState.perBoxQty}-${Date.now()}`,
             title: 'Brownies',
-            category: `${orderState.numBoxes} × 12 Box`,
-            price: PRICING.brownie[12],
+            category: `${orderState.numBoxes} × ${orderState.perBoxQty} Box`,
+            price: PRICING.brownie[orderState.perBoxQty],
             qty: orderState.numBoxes,
             flavorSummary: 'Fudge Brownies',
             image: IMAGES.brownieBox || IMAGES.smallBox
