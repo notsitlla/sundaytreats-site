@@ -48,6 +48,7 @@
       .ribbon{overflow:hidden;border-block:1px solid var(--espresso);background:var(--saffron);color:var(--espresso)}.ribbon-track{display:flex;width:max-content;animation:scroll 26s linear infinite}.ribbon span{padding:13px 24px;font:italic 21px Fraunces,serif;white-space:nowrap}.ribbon span:after{content:' •';font-style:normal;margin-left:24px}@keyframes scroll{to{transform:translateX(-50%)}}
       .section{max-width:1240px;margin:auto;padding:105px 32px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:30px;margin-bottom:42px}.section h2{margin:12px 0 0;color:var(--espresso);font-size:clamp(42px,5vw,68px);line-height:.95;letter-spacing:-.05em}.section-intro{max-width:330px;color:var(--muted);font-size:14px;line-height:1.7}
       .menu-section{background:var(--butter)}.menu-wrap{max-width:1240px;margin:auto;padding:105px 32px}
+      .addon-section-divider{margin-top:42px}.section-rule{border:0;border-top:1px solid var(--cocoa);margin:0 0 24px}.addon-header{display:flex;align-items:baseline;justify-content:space-between;gap:20px}.step-label{color:var(--clay);font:700 10px 'Space Mono',monospace;letter-spacing:.14em}.addon-header h2{margin:0;color:var(--espresso);font:600 34px Fraunces,serif}.addon-card{margin-top:18px}
       
       /* Bento Grid Cards Styles */
       .bento-grid {
@@ -137,6 +138,13 @@
 
       /* Pill Selector & Step Builder Styles */
       .builder-card{border:1px solid var(--line);background:var(--paper);padding:36px;border-radius:4px;box-shadow:0 4px 16px rgba(48,36,31,0.06)}
+      .menu-item{display:grid;grid-template-columns:140px 1fr;gap:22px;align-items:center;margin-top:18px;padding:18px;border:1px solid var(--line);background:var(--paper);border-radius:4px}
+      .item-image{width:140px;height:140px;object-fit:cover}
+      .item-details h3{margin:0 0 6px;color:var(--espresso);font:600 25px Fraunces,serif}
+      .item-details .description{margin:0 0 10px;color:var(--muted);font-size:13px}
+      .item-details .price{margin:0 0 14px;color:var(--clay);font:600 19px Fraunces,serif}
+      .add-to-order-btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border:0;border-radius:2px;background:var(--clay);color:var(--cream);font:700 10px 'Space Mono',monospace;letter-spacing:.08em;text-transform:uppercase;cursor:pointer}
+      .add-to-order-btn:hover{background:var(--espresso)}
       .pill-group{display:flex;flex-wrap:wrap;gap:12px;margin-bottom:24px}
       .pill-btn{padding:12px 20px;border:1px solid var(--line);background:var(--cream);color:var(--cocoa);font-family:'DM Sans',sans-serif;font-weight:600;font-size:14px;cursor:pointer;border-radius:3px;transition:all .2s ease}
       .pill-btn:hover{border-color:var(--clay);background:#fdfaf4}
@@ -171,6 +179,7 @@
 
       @media(max-width:900px){.nav{position:absolute;top:100%;right:0;left:0;display:none;flex-direction:column;align-items:stretch;padding:12px 20px 20px;background:var(--cream);border-bottom:1px solid var(--line)}.nav.open{display:flex}.nav a,.nav button{text-align:center;padding:12px}.menu{display:block}.hero{grid-template-columns:1fr;padding-top:55px}.hero-copy{text-align:center}.hero-lede{margin-inline:auto}.eyebrow,.hero-note,.actions{justify-content:center}.ingredient-grid,.story,.gift-grid,.contact-grid{grid-template-columns:1fr;gap:45px}.section-head{display:block}.section-intro{margin-top:18px}.license{grid-template-columns:auto 1fr}.license-location{grid-column:2}.faq-grid{grid-template-columns:1fr;gap:40px}.selection-summary{flex-direction:column;align-items:flex-start;gap:16px}}
       @media(max-width:600px){.topline{font-size:8px}.topline span{display:none}.header{padding:13px 20px}.logo{width:132px}.hero{padding:50px 20px 65px}h1{font-size:clamp(48px,15vw,74px)}.hero-gallery{height:325px}.hero-main{inset:0 0 22px 52px}.hero-small{width:120px;height:150px;border-width:6px}.stamp{right:0;width:78px;height:78px;font-size:7px}.trust{justify-content:flex-start;gap:14px 20px;padding:16px 20px;font-size:8px}.trust span{width:calc(50% - 10px)}.section,.menu-wrap{padding:74px 20px}.flavor-row{grid-template-columns:28px 1fr}.allergens{grid-column:2;text-align:left}.collage{height:370px}.collage-a{inset:0 40px 45px 0}.collage-b{height:155px;border-width:7px}.caption{left:-18px}.license{margin-top:45px;padding:18px;gap:12px}.license h3{font-size:20px}.license p{font-size:11px}.license-location{grid-column:2}.process-grid{display:block}.step,.step+.step{min-height:0;padding:25px 0;border-right:0;border-bottom:1px solid var(--cocoa)}.step:last-child{border-bottom:0}.gift-photo{height:315px}.row{grid-template-columns:1fr}.footer-top,.footer-bottom{display:block}.footer-top p{margin:25px 0}.footer-links{margin-top:25px}.footer-bottom span{display:block;margin-top:8px}.drawer{width:100%}.drawer-head,.cart-items,.checkout{padding-left:20px;padding-right:20px}.summary{margin-inline:20px}.drawer-actions{padding-inline:20px}}
+      @media(max-width:600px){.menu-item{grid-template-columns:1fr;gap:14px}.item-image{width:100%;height:220px}}
     </style>
   </head>
   <body>
@@ -242,6 +251,22 @@
               </div>
               <button class="btn-action" id="main-action-btn" onclick="handleConfigureOrAdd()">Configure Flavors ↗</button>
             </div>
+          </div>
+          <div class="addon-section-divider">
+            <hr class="section-rule" />
+            <div class="addon-header">
+              <span class="step-label">EXTRAS &amp; ADD-ONS</span>
+              <h2></h2>
+            </div>
+          </div>
+          <div class="menu-item addon-card">
+              <img src="images/vanilla_extract2.png" alt="Pure Vanilla Extract" class="item-image" />
+              <div class="item-details">
+                <h3>Pure Vanilla Extract (4oz)</h3>
+                <p class="description">Made with premium vanilla beans and vodka.</p>
+                <p class="price">$10.00</p>
+                <button class="add-to-order-btn" type="button" data-product="vanilla-extract-4oz">ADD TO ORDER</button>
+              </div>
           </div>
         </div>
       </section>
@@ -651,6 +676,23 @@
       function closeCart() { layer.hidden = true; }
       function changeQty(n, a) { cart[n].qty += a; if (cart[n].qty < 1) cart.splice(n, 1); renderCart(); }
       function removeItem(n) { cart.splice(n, 1); renderCart(); }
+      function addVanillaExtract() {
+        const existingItem = cart.find(item => item.id === 'vanilla-extract-4oz');
+        if (existingItem) {
+          existingItem.qty += 1;
+        } else {
+          cart.push({
+            id: 'vanilla-extract-4oz',
+            title: 'Pure Vanilla Extract (4oz)',
+            category: 'Pantry item',
+            price: 10,
+            qty: 1,
+            flavorSummary: 'Premium vanilla beans and vodka',
+            image: 'images/Other Pastries/vanilla_extract.PNG'
+          });
+        }
+        openCart();
+      }
 
       function showCheckout() {
         drawer.innerHTML = `
@@ -756,6 +798,7 @@
       document.getElementById('open-cart').onclick = openCart;
       document.getElementById('contact-cart').onclick = openCart;
       document.getElementById('close-cart').onclick = closeCart;
+      document.querySelector('[data-product="vanilla-extract-4oz"]').onclick = addVanillaExtract;
       layer.onclick = e => { if (e.target === layer) closeCart(); };
       document.getElementById('event-request').onclick = () => { 
         document.getElementById('contact').scrollIntoView({ behavior: 'smooth' }); 
