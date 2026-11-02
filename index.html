@@ -247,19 +247,25 @@
           </div>
 
           <div class="bento-grid order-grid">
-            <div class="flavor-card">
+            <div class="flavor-card" id="Single-Flavor-Cookie-Box">
               <div>
-                <div class="kicker">24 cookies</div><h3>Sunday Cookie Box</h3>
-                <p>Choose one flavor for the whole box, or create a mixed batch with three flavors.</p>
-                <div class="field"><label for="cookie-style">Box style</label><select id="cookie-style"><option value="single">Single flavor — $40</option><option value="mixed">Mixed batch (3 flavors) — $45</option></select></div>
-                <p id="mixed-flavors-message" hidden>Mixed batch includes 8 cookies each of these three flavors: Chocolate Chip, White Chocolate Strawberry, and Triple Chocolate.</p>
+                <div class="kicker">24 cookies</div><h3>Cookie Box</h3>
+                <p>Choose one flavor for the whole box.</p>
                 <div class="field" id="single-flavor-wrap"><label for="single-flavor">Choose flavor</label><select id="single-flavor"></select></div>
-                <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:var(--cocoa);font-size:13px"><input type="checkbox" id="gift-addon" style="margin-top:4px"><span><strong>Add gift packaging and a personalized note (+$10)</strong><br><span style="color:var(--muted)">Gift-ready packaging with your message included.</span></span></label>
+                <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:var(--cocoa);font-size:13px"><input type="checkbox" id="gift-addon-single" style="margin-top:4px"><span><strong>Add gift packaging and a personalized note (+$10)</strong><br><span style="color:var(--muted)">Gift-ready packaging with your message included.</span></span></label>
               </div>
               <button class="add-to-order-btn" type="button" id="add-cookie-box">Add Cookie Box to Order</button>
             </div>
+            <div class="flavor-card" id="3-Flavor-Cookie-Box">
+              <div>
+                <div class="kicker">24 cookies</div><h3>3 Flavor Cookie Box</h3>
+                <p>Mixed batch includes 8 cookies each of these three flavors: Chocolate Chip, White Chocolate Strawberry, and Triple Chocolate.</p>
+                <label style="display:flex;gap:10px;align-items:flex-start;margin:16px 0;color:var(--cocoa);font-size:13px"><input type="checkbox" id="gift-addon-mixed" style="margin-top:4px"><span><strong>Add gift packaging and a personalized note (+$10)</strong><br><span style="color:var(--muted)">Gift-ready packaging with your message included.</span></span></label>
+              </div>
+              <button class="add-to-order-btn" type="button" id="add-3-flavor-cookie-box">Add 3-Flavor Cookie Box to Order</button>
+            </div>
             <!-- <div class="flavor-card"><div><div class="kicker">Made for sharing</div><h3>Cookie Gift Box</h3><p>Choose a 24-cookie box and add gift packaging with a personalized note for an additional $10.</p><p style="color:var(--clay);font-family:'Fraunces',serif;font-size:22px">$50–$55 total</p></div><button class="add-to-order-btn" type="button" id="choose-gift-box">Build a Gift Box</button></div>-->
-            <div class="flavor-card"><div><div class="kicker">Custom quantities</div><h3>Event Cookies</h3><p>Planning a party, office gathering, school event, or celebration? Contact us for quantities, flavors, and pricing.</p></div><button class="add-to-order-btn" type="button" id="event-cookie-order">Request an Event Order</button></div>
+            <div class="flavor-card"><div><div class="kicker">Custom quantities</div><h3>Custom/Event Cookies</h3><p>Planning a party, office gathering, school event, or celebration? Contact us for quantities, flavors, and pricing.All Flavors are available.</p></div><button class="add-to-order-btn" type="button" id="event-cookie-order">Request an Event Order</button></div>
             <div class="flavor-card"><div><div class="kicker">Box of 18</div><h3>Brownies</h3><p>A box of 18 rich, fudgy brownies.</p><p class="price">$40.00</p></div><button class="add-to-order-btn" type="button" id="add-brownies">Add Brownies to Order</button></div>
           </div>
           <div class="addon-section-divider">
@@ -452,7 +458,7 @@
           <input type="text" name="website" style="display:none">
           <div class="row"><div class="field"><label for="name">Your name</label><input id="name" name="name" required /></div><div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" required /></div></div>
           <div class="row"><div class="field"><label for="date">Preferred date</label><input id="date" type="date" name="date" required /></div><div class="field"><label for="fulfillment">Pickup or delivery</label><select id="fulfillment" name="fulfillment" required><option value="">Choose one</option><option>Pickup in Littleton</option><option>Delivery in Denver metro</option><option>Not sure yet</option></select></div></div>
-          <div class="field"><label for="details">Your order</label><textarea id="details" name="details" placeholder="Example: 36 Small Cookies — 18 Chocolate Chip, 18 Brown Butter..."></textarea></div>
+          <div class="field"><label for="details">Your order</label><textarea id="details" name="details" placeholder="Example: 36 Cookies — 18 Chocolate Chip, 18 Brown Butter..."></textarea></div>
           <div class="cf-turnstile" data-sitekey="0x4AAAAAADql0CrIcnL69Wvm" style="margin: 14px 0;"></div>
           <div class="actions"><button class="button" type="submit">Send an order request ↗</button><button class="button outline" type="button" id="contact-cart">View my order</button></div><small>No payment now — we confirm availability and final details first.</small>
         </form>
@@ -501,30 +507,23 @@
         if (IMAGES[key]) img.src = IMAGES[key];
       });
 
-      const COOKIE_FLAVORS = ["Chocolate Chip","Brown Butter","White Chocolate Strawberry","Triple Chocolate","Kitchen Sink"];
+      // const COOKIE_FLAVORS = ["Chocolate Chip","Brown Butter","White Chocolate Strawberry","Triple Chocolate","Kitchen Sink"];
+      const COOKIE_FLAVORS = ["Chocolate Chip","White Chocolate Strawberry","Triple Chocolate"];
       const MIXED_COOKIE_FLAVORS = ["Chocolate Chip","White Chocolate Strawberry","Triple Chocolate"];
       const flavorOptions = COOKIE_FLAVORS.map(f => `<option value="${f}">${f}</option>`).join('');
       document.getElementById('single-flavor').innerHTML = flavorOptions;
-      const cookieStyle = document.getElementById('cookie-style');
-      function updateCookieStyle() {
-        const mixed = cookieStyle.value === 'mixed';
-        document.getElementById('single-flavor-wrap').hidden = mixed;
-        document.getElementById('mixed-flavors-message').hidden = !mixed;
-      }
-      cookieStyle.addEventListener('change', updateCookieStyle);
-      updateCookieStyle();
-
-      function addCookieBox(forceGift = false) {
-        const mixed = cookieStyle.value === 'mixed';
-        const gift = forceGift || document.getElementById('gift-addon').checked;
+      function addCookieBox(mixed, giftAddonId) {
+        const giftAddon = document.getElementById(giftAddonId);
+        const gift = giftAddon.checked;
         const flavors = mixed ? MIXED_COOKIE_FLAVORS : [document.getElementById('single-flavor').value];
         const basePrice = mixed ? 45 : 40;
         const flavorSummary = mixed ? `Mixed batch: ${flavors.join(', ')} (8 cookies each)` : `24 ${flavors[0]}`;
         cart.push({id:`cookie-box-${Date.now()}`,title:gift?'Cookie Gift Box':'Sunday Cookie Box',category:`24 cookies · ${mixed?'3-flavor mixed batch':'single flavor'}${gift?' · gift packaging + note':''}`,price:basePrice+(gift?10:0),qty:1,flavorSummary:`${flavorSummary}${gift?' · Gift packaging and personalized note included':''}`,image:gift?IMAGES.giftBox:IMAGES.largeBox});
-        document.getElementById('gift-addon').checked = false;
+        giftAddon.checked = false;
         openCart();
       }
-      document.getElementById('add-cookie-box').addEventListener('click', () => addCookieBox(false));
+      document.getElementById('add-cookie-box').addEventListener('click', () => addCookieBox(false, 'gift-addon-single'));
+      document.getElementById('add-3-flavor-cookie-box').addEventListener('click', () => addCookieBox(true, 'gift-addon-mixed'));
       const chooseGiftBox = document.getElementById('choose-gift-box');
       if (chooseGiftBox) chooseGiftBox.addEventListener('click', () => addCookieBox(true));
       document.getElementById('add-brownies').addEventListener('click', () => {
